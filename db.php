@@ -21,7 +21,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Select the databse
-$conn = new mysqli($servername,$username,$password,"rahwy2");
+$conn = new mysqli($servername,$username,$password,"rahwy");
 
 // Create the user table if it doesnt exist
 $sql = "CREATE TABLE IF NOT EXISTS user (
