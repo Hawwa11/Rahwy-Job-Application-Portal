@@ -13,9 +13,9 @@ if ($conn->connect_error) {
 }
 
 // Create new databse if it doesnt exist
-$sql = "CREATE DATABASE IF NOT EXISTS rahwy2";
+$sql = "CREATE DATABASE IF NOT EXISTS rahwy";
 if ($conn->query($sql) === TRUE) {
-  echo "Database already existed or created successfully";
+  
 } else {
   echo "Error creating database: " . $conn->error;
 }
@@ -33,7 +33,7 @@ $sql = "CREATE TABLE IF NOT EXISTS user (
     )";
     
     if ($conn->query($sql) === TRUE) {
-      echo "Table user already existed or created successfully";
+
     } else {
       echo "Error creating table: " . $conn->error;
     }
