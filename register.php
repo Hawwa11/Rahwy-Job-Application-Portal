@@ -33,7 +33,7 @@ input {
        <input type="password" name="password" id="password" placeholder="Enter your password..." required /></br>
        <input type="Cpassword" name="Cpassword" id="Cpassword" placeholder="Confirm your password..." required /></br>
        <input type="tel" name="phoneNum" id="phoneNum" placeholder="Enter your phone number..." required /></br>
-       <input type="submit" name="submit" value="Submit"></td>
+       <input type="submit" name="submit" value="Submit" onclick="window.location = \'home.php?us='.$user.'\'"/></br>
         </form>
 
 
@@ -49,9 +49,11 @@ if (isset($_POST['submit'])){
     $insert = mysqli_query($conn,"INSERT INTO user (username, password_hash, phone, user_role) VALUES('$user','$pass','$pNum','0')");
 
     if($insert){
-        echo"You have reistered succesfully";
-        sleep(5);
-        echo "window.location = \'home.php?us='.$user.'\'";
+        echo "You have reistered succesfully";
+        //sleep(5);
+        //echo "window.location = \'home.php?us='.$user.'\'";
+    }else{
+        echo 'Failed to add new record '.mysqli_error($conn);
     }
 }
 
