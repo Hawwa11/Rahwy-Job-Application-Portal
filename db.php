@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Create new databse if it doesnt exist
-$sql = "CREATE DATABASE IF NOT EXISTS rahwy2";
+$sql = "CREATE DATABASE IF NOT EXISTS rahwy";
 if ($conn->query($sql) === TRUE) {
 
 } else {
@@ -21,7 +21,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Select the databse
-$conn = new mysqli($servername,$username,$password,"rahwy2");
+$conn = new mysqli($servername,$username,$password,"rahwy");
 
 // Create the user table if it doesnt exist
 $sql = "CREATE TABLE IF NOT EXISTS user (
