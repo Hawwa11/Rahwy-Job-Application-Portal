@@ -5,26 +5,18 @@
 <label><strong>Enter Captcha:</strong></label><br />
 <input type="text" id="captcha" name="captcha" ">
 <p><br/>
-<img src="captcha2.php" alt="CAPTCHA" class="captcha-image" id='captcha_image'>
-<i class="fa fa-refresh refresh-captcha"></i>
+<img src="captcha.php" alt="CAPTCHA" class="captcha-image" id='captcha_image'>
+<i class="fa fa fa-refresh refresh-captcha" style="font-size:24px"></i>
 </p>
-<p>Can't read the image?
-<a href='javascript: refreshCaptcha();'>click here</a>
-to refresh</p>
+<p>**Click reload if image not readable</p>
 <input type="submit" name="submit" value="Submit">
 </form>
-
-
 
 <script>
 
 var refreshButton = document.querySelector(".refresh-captcha");
 refreshButton.onclick = function() {
-  document.querySelector(".captcha-image").src = 'captcha2.php?' + Date.now();
-}
-
-function refreshCaptcha(){
-	document.querySelector(".captcha-image").src = 'captcha2.php?' + Date.now();
+  document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
 }
 </script>
 
