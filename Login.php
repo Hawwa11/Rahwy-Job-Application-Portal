@@ -7,7 +7,7 @@ session_start();
 error_reporting(0);
 
 if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
+    header("Location: home.php");
 }
 
 
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
       if($row){
 
 		$_SESSION['username'] = $row['username'];
-		header("Location: welcome.php");
+		header("Location: home.php");
 		
 
 		}
