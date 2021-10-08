@@ -10,7 +10,7 @@
 		}
 		//echo "<h1>Logout successful</h1>";
 		//echo "You have successfully logged out.";
-		//echo "Click here to <a href='rememberMeTest.php'>login again</a>";
+		//echo "Click here to <a href='rememberMeTest.php'>login again</a>"; test
 	?>
 	<h1>Logout successful</h1>
 	You have successfully logged out.
