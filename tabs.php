@@ -73,7 +73,7 @@ body, html {
     </div>
     
     <div id="ChangePassword" class="tabcontent">
-      <h3>Change Password</h3>
+      <?php include("changePassword.php"); ?>
     </div> 
 
 

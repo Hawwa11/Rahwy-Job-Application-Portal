@@ -104,9 +104,6 @@ if (isset($_POST['submit'])) {
 			</div>
 			<div class="input-group">
 				<button name="submit" class="btn">Login</button>
-				<form action="logout.php">
-					<button type="submit" value="Logout" >
-				</form>	
 			</div>
 			<p class="login-register-text">Don't have an account? <a href="register.php">Register Here</a>.</p>
 			<p class="login-register-text">Forgot Password? <a href="resetform.php">Click here to reset</a>.</p>
