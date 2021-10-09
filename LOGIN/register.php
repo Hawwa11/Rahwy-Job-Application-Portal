@@ -45,9 +45,12 @@ if (isset($_POST['submit'])){
     $user = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = mysqli_real_escape_string($conn, $_POST['password']);
     $pNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
-
+     
     $insert = mysqli_query($conn,"INSERT INTO user (username, password_hash, phone, user_role) VALUES('$user','$pass','$pNum','0')");
+    
 
+
+    
     if($insert){
         echo "You have reistered succesfully";
         //sleep(5);

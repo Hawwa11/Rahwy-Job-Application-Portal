@@ -6,9 +6,6 @@ session_start();
 
 error_reporting(0);
 
-if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
-}
 
 
 if (isset($_POST['submit'])) {
@@ -41,8 +38,21 @@ if (isset($_POST['submit'])) {
 	
       if($row){
 
+		if (isset($_POST["rememberme"])) {
+			setcookie("username", $email, time() + (86400));
+			setcookie("pw", $password, time() + (86400));							
+		}
+		else {
+			if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
+				$email = $_COOKIE["username"];
+				$password = $_COOKIE["pw"];
+				setcookie("username", $email, time() - 1);
+				setcookie("pw", $password, time() - 1);
+			}
+		}
+
 		$_SESSION['username'] = $row['username'];
-		header("Location: welcome.php");
+		header("Location: home.php");
 		
 
 		}
@@ -79,10 +89,15 @@ if (isset($_POST['submit'])) {
 		<form action="" method="post" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;">RAHWY LOGIN</p>
 			<div class="input-group">
-				<input type="email" placeholder="Email" name="username" value="<?php echo $email; ?>" required>
+				<input type="email" placeholder="Email" name="username" id="username" value="<?php echo $email; ?>" required>
 			</div>
 			<div class="input-group">
-				<input type="password" placeholder="Password" name="password_hash" value="<?php echo $password ?>" required>
+				<input type="password" placeholder="Password" name="password_hash" id="password_hash" value="<?php echo $password ?>" required>
+				
+			</div>
+			<div style="margin-bottom: 15px;">
+				<input type="checkbox" id="rememberme" name="rememberme" value="1" >
+				Remember me
 			</div>
 			<div class="input-group">
 				<button name="submit" class="btn">Login</button>
@@ -91,5 +106,17 @@ if (isset($_POST['submit'])) {
 			<p class="login-register-text">Forgot Password? <a href="resetform.php">Click here to reset</a>.</p>
 		</form>
 	</div>
+	
+	<?php
+		if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
+			$email = $_COOKIE["username"];
+			$password = $_COOKIE["pw"];
+			echo "<script>
+				document.getElementById('username').value = '$email';
+				document.getElementById('password_hash').value = '$password';
+				document.getElementById('rememberme').checked = true;
+			</script>";
+		}
+	?>
 </body>
 </html>
