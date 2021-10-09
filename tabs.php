@@ -68,7 +68,7 @@ body, html {
     </div>
     
     <div id="EditProfile" class="tabcontent">
-      <h3>Edit Profile</h3>
+      <?php include("profilePage.php"); ?>
       
     </div>
     
