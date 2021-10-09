@@ -1,11 +1,8 @@
 <?php
 include("db.php");
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $conn = new mysqli($servername,$username,$password,"rahwy2");
+
 session_start();
-$username = "yooooooo";
+$username = $_SESSION['username'];
 
 //Create the application table if it doesnt exist
 $sql = "CREATE TABLE IF NOT EXISTS form (
@@ -34,26 +31,40 @@ $sql = "CREATE TABLE IF NOT EXISTS form (
 
 if(isset($_POST['submit'])){
 
-	$fname = mysqli_real_escape_string($mysqli, $_POST['fname']);
-	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
-	$expectedSalary = mysqli_real_escape_string($mysqli, $_POST['es']);
-	$cv = mysqli_real_escape_string($mysqli, $_POST['cv']);
-	$martialStatus = mysqli_real_escape_string($mysqli, $_POST['ms']);
-	$jobPosition = mysqli_real_escape_string($mysqli, $_POST['jp']);
-	$enquiry = mysqli_real_escape_string($mysqli, $_POST['enquiry']);
-	$coverLetter = mysqli_real_escape_string($mysqli, $_POST['cl']);
-	$dOB = mysqli_real_escape_string($mysqli, $_POST['dob']);
-	$jobType = mysqli_real_escape_string($mysqli, $_POST['jt']);
-  $fAddress = mysqli_real_escape_string($mysqli, $_POST['fa']);
+//   $fname = $_POST['fname'];
+// 	$email = $_POST['email'];
+// 	$expectedSalary = $_POST['es'];
+// 	$cv = $_POST['cv'];
+// 	$martialStatus = $_POST['ms'];
+// 	$jobPosition = $_POST['jp'];
+// 	$enquiry = $_POST['enquiry'];
+// 	$coverLetter = $_POST['cl'];
+// 	$dOB = $_POST['dob'];
+// 	$jobType = $_POST['jt'];
+//   $fAddress = $_POST['fa'];
+//   $appStatus = 0;
+
+//  echo $fname."<br>".$email."<br>".$username."<br>".$expectedSalary."<br>".$cv."<br>".$martialStatus."<br>".$jobPosition."<br>".$enquiry."<br>".$coverLetter."<br>".$dOB."<br>".$jobType."<br>".$fAddress."<br>".$appStatus;
+	$fname = $_POST['fname'];
+	$email = $_POST['email'];
+	$expectedSalary = $_POST['es'];
+	$cv = $_POST['cv'];
+	$martialStatus = mysqli_real_escape_string($conn, $_POST['ms']);
+	$jobPosition = mysqli_real_escape_string($conn, $_POST['jp']);
+	$enquiry = mysqli_real_escape_string($conn, $_POST['enquiry']);
+	$coverLetter = $_POST['cl'];
+	$dOB = mysqli_real_escape_string($conn, $_POST['dob']);
+	$jobType = mysqli_real_escape_string($conn, $_POST['jt']);
+  $fAddress = mysqli_real_escape_string($conn, $_POST['fa']);
   $appStatus = 0;
 	
-	$insert = mysqli_query($mysqli, "INSERT INTO form (fname, email, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
-    VALUES ($fname','$email','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus)");
+	$insert = mysqli_query($conn, "INSERT INTO form (fname, email, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
+   VALUES ('$fname','$email','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus')");
 	
 	if($insert){
 		echo 'Successfully submitted the application!';
 	} else {
-		echo 'Failed to submit application due to '.mysqli_error($mysqli);
+		echo 'Failed to submit application due to '.mysqli_error($conn);
 	}
 	
 }
@@ -133,11 +144,11 @@ input[type=submit]:hover {
 <h1>Welcome <?php echo $username .'!';?></h1>
 <div class="container">
 <h3>**Please fill in the following details in the job application form</h3><br>
-<form action="home.php" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
   <!-- Name -->
     <div class="row">
       <div class="col-25">
-        <label for="fname">First Name</label>
+        <label for="fname">Full Name</label>
       </div>
       <div class="col-75">
         <input type="text" id="fname" name="fname" placeholder="" required>
@@ -211,11 +222,11 @@ input[type=submit]:hover {
         <label for="jp">Job Position</label>
       </div>
       <div class="col-75">
-            <input type="checkbox" name="jp[]" id="jp" value="Senior">
+            <input type="radio" name="jp" id="jp" value="Senior">
             <label>Senior</label>
-            <input type="checkbox" name="jp[]" id="jp" value="Junior">
+            <input type="radio" name="jp" id="jp" value="Junior">
             <label>Junior</label>
-            <input type="checkbox" name="jp[]" id="jp" value="Intern">
+            <input type="radio" name="jp" id="jp" value="Intern">
             <label>Intern</label>
       </div>
     </div>
@@ -263,7 +274,7 @@ input[type=submit]:hover {
 
 
     <div class="row">
-      <input type="submit" value="Submit">
+      <input type="submit" name="submit" value="Submit">
     </div>
   </form>
 </div>
