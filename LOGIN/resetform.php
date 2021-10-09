@@ -13,7 +13,7 @@ input {
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid blue;
 }
 </style>
 </head>
