@@ -108,7 +108,7 @@
 		<label for="enquiry"><b>Enquiry: </b></label>
 		<?php echo $enquiry; ?>
 	</div>
-
+    <!--Update Button-->
     <div>
         <input type="submit" name="update" value="Update">
     </div>
