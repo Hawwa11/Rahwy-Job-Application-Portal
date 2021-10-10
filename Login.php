@@ -13,35 +13,30 @@ if (isset($_SESSION['username'])) {
 
 if (isset($_POST['submit'])) {
 
-	
 	$email = $_POST['username'];
 	$password = $_POST['password_hash'];
-
-    
 	
 	$email = mysqli_real_escape_string($conn,$email);
 	$password = mysqli_real_escape_string($conn,$password);
 	
 
-	$sql = "SELECT * FROM user WHERE username='$email' AND password_hash='$password'";
-   
+	$sql = "SELECT * FROM user WHERE username='$email'";
+	
 
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
+
+	$hashedPasswordThatWasStoredInDB = $row['password_hash'];
+
 	if (!$result) {
 	  
-	
-		echo "Query Failed";
+	   echo "Query Failed";
 
 	} 
 
-
 	else{
-
-	
-      if($row){
-
-		if (isset($_POST["rememberme"])) {
+ 
+   if (isset($_POST["rememberme"])) {
 			setcookie("username", $email, time() + (86400));
 			setcookie("pw", $password, time() + (86400));							
 		}
@@ -52,27 +47,22 @@ if (isset($_POST['submit'])) {
 				setcookie("username", $email, time() - 1);
 				setcookie("pw", $password, time() - 1);
 			}
-		}
+		}	
 
+	if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
+	        
 		$_SESSION['username'] = $row['username'];
-		header("Location: tabs.php");
-		
-
-		}
-
-		else{
-			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+			header("Location: tabs.php");
 			
-		}
-	
-	}	 
+	}
+	else{
+		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+	}
 
+	}
 
 	}
 	
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +80,8 @@ if (isset($_POST['submit'])) {
 <body>
 	<div class="container">
 		<form action="" method="post" class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">RAHWY LOGIN</p>
+			<p class="login-text" style="font-size: 2rem; font-weight: 800;"><img  width="200" 
+     height="100" src="RAHWYLogo.png"> </p>
 			<div class="input-group">
 				<input type="email" placeholder="Email" name="username" id="username" value="<?php echo $email; ?>" required>
 			</div>
