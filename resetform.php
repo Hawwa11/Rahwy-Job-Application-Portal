@@ -105,8 +105,6 @@ a:hover {
    margin-bottom: 0px!important;
 }
 
-
-
 </style>
 </head>
 <body class="backgroundimg2">
@@ -114,27 +112,36 @@ a:hover {
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<div id='background'>
-<div id="logo" class="logo"> 
-	<img  width="200" 
-     height="100" src="RAHWYLogo.png"> 
-</div> 
-    <div id='content' class="card border-dark mb-3" style="max-width: 20rem; height: 420px">
-    <div class="card-header"><h4 style="font-family: Times New Roman">Reset your form here</h4></div>
-    <div class="card-header"><h4 style="font-family: Times New Roman">To reset your password, Please provide</h4></div>
 
+<script>
+function myFunction() { 
+	d.getElementById("reset").style.display="none"; 
+	document.getElementById("newpass").style.display="block"; 
+}
+</script>
+
+<div id='background'>
+</div> 
+    
+    <div id='reset' class="card border-dark mb-3" style="max-width: 20rem; height: 420px">
+    <div class="card-header"><center><h3 style="font-weight: bold">Reset Form</h3></center></div>
+    <div class="card-header"><h5 style="font-weight:bold">To reset your password, Please provide:</h5></div>
+    
+    <form action="" method="post" class="card-body text-dark">
   
     </br>
-         <input type="email" name="username" id="email" placeholder="Enter your username..." class="Fininput" required /></br>
-       <input type="tel" name="phone" id="phone" placeholder="Enter your phone number..." class="Fininput" required /></br>
+         <input type="email" name="username" id="email" placeholder="Username..." class="Fininput" required /></br>
+       <input type="tel" name="phone" id="phone" placeholder="Phone number..." class="Fininput" required /></br>
 
-       <input type="submit" name="submit" value="Submit" class="submit-btn"/></br>
+       <input type="submit" name="submit" value="Submit" class="submit-btn"  onclick="myFunction()"/></br>
       </form>
 
-</html>
+
+
 
 <?php
 include "db.php";
+
 
    if(isset($_POST["submit"])){
 
@@ -158,29 +165,35 @@ $row = mysqli_fetch_assoc($result);
 
   else {
    
-     if($row){ 
-      
-      
-      ?>
-     <form action="" method="post">
-      Enter your new password
+     if(!$row){ 
+
+ 
+    echo "<p>&nbsp;&nbsp; Incorrect username or phone number.</p>";
+    echo "<p>&nbsp;&nbsp; Please try again</p>"
+       ?>
+       </div>
+
+       <?php
+          }
+
+        else{
+
+          ?>
+
+<div id='newpass' class="card border-dark mb-3" style="max-width: 20rem; height: 420px" style="display:none">
+      <div class="card-header"><center><h3 style="font-weight: bold">Enter your new password</h3></center></div>
+    <form action="" method="post" class="card-body text-dark">
+ 
     <input type='password' name='password_hash' id='newpass' placeholder='Password' class="Fininput" required /></br>
      
    <input type='submit' name='submit2' value='Reset Password' class="submit-btn"/></br>
-     </form>
-   
-     <?php 
-  }
-  else{
-    echo "Incorrect username or phone number. Please try again!";
-    echo "<br>";
-    echo "<br>";
-          }
+   <?php
 
         }
 
       }
-           if(isset($_POST["submit2"])){
+    }
+    if(isset($_POST["submit2"])){
 
             $password=$_POST["password_hash"];
 
@@ -195,16 +208,16 @@ $row = mysqli_fetch_assoc($result);
            }
        
            else{
-             echo "<br>";
-             echo "<br>";
-               echo "Password has been successfully reset ";
-               echo "<br>";
-               echo "<br>";
-               echo "<a href='Login.php'>Click here to to Login </a>";
+
+      
+               echo "<p>&nbsp;&nbsp; Password has been successfully reset</p>";
+               echo "<p>&nbsp;&nbsp; <a href='Login.php'>Click here to to Login </a></p>";
+
+               ?>
+               </div>
+           </form>
+           <?php }
        
             }
-       
-           }
+      
 
-    ?>
-   
