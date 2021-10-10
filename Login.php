@@ -7,7 +7,7 @@ session_start();
 error_reporting(0);
 
 if (isset($_SESSION['username'])) {
-    header("Location: home.php");
+    header("Location: tabs.php");
 }
 
 
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
 		}
 
 		$_SESSION['username'] = $row['username'];
-		header("Location: home.php");
+		header("Location: tabs.php");
 		
 
 		}
