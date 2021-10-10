@@ -161,6 +161,9 @@ if (isset($_POST['submit'])){
 ?>
 
 <div id='background'>
+<div id="logo" class="logo"> 
+	<img  width="200" 
+     height="100" src="RAHWYLogo.png"> 
 </div> 
     <div id='content' class="card border-dark mb-3" style="max-width: 20rem; height: 420px">
     <div class="card-header"><h4 style="font-family: Times New Roman">Register With Us!</h4></div>

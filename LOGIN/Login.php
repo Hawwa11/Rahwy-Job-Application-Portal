@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 		}
 
 		$_SESSION['username'] = $row['username'];
-		header("Location: home.php");
+		header("Location: tabs.php");
 		
 
 		}
@@ -86,7 +86,8 @@ if (isset($_POST['submit'])) {
 <body>
 	<div class="container">
 		<form action="" method="post" class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">RAHWY LOGIN</p>
+			<p class="login-text" style="font-size: 2rem; font-weight: 800;"><img  width="200" 
+     height="100" src="RAHWYLogo.png"> </p>
 			<div class="input-group">
 				<input type="email" placeholder="Email" name="username" id="username" value="<?php echo $email; ?>" required>
 			</div>
