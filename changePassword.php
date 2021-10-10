@@ -6,9 +6,16 @@
 <html>
     <head>
         <title>Change Password</title>
+            <style>
+                .cpForm {
+                    padding: 20px;
+                    border: 3px solid darkgrey;
+                    border-radius: 30px;
+                }
+            </style>
     </head>
     <body>
-        <form action="changeP.php" method="post">
+        <form action="changeP.php" class="cpForm" method="post">
             <div>
                 <h1>Change Password</h1>
                 <?php if (isset($_GET['error'])) { ?>
