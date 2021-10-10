@@ -9,35 +9,30 @@ error_reporting(0);
 
 if (isset($_POST['submit'])) {
 
-	
 	$email = $_POST['username'];
 	$password = $_POST['password_hash'];
-
-    
 	
 	$email = mysqli_real_escape_string($conn,$email);
 	$password = mysqli_real_escape_string($conn,$password);
 	
 
-	$sql = "SELECT * FROM user WHERE username='$email' AND password_hash='$password'";
-   
+	$sql = "SELECT * FROM user WHERE username='$email'";
+	
 
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
+
+	$hashedPasswordThatWasStoredInDB = $row['password_hash'];
+
 	if (!$result) {
 	  
-	
-		echo "Query Failed";
+	   echo "Query Failed";
 
 	} 
 
-
 	else{
-
-	
-      if($row){
-
-		if (isset($_POST["rememberme"])) {
+ 
+   if (isset($_POST["rememberme"])) {
 			setcookie("username", $email, time() + (86400));
 			setcookie("pw", $password, time() + (86400));							
 		}
@@ -48,27 +43,22 @@ if (isset($_POST['submit'])) {
 				setcookie("username", $email, time() - 1);
 				setcookie("pw", $password, time() - 1);
 			}
-		}
+		}	
 
+	if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
+	        
 		$_SESSION['username'] = $row['username'];
-		header("Location: tabs.php");
-		
-
-		}
-
-		else{
-			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+			header("Location:tabs.php");
 			
-		}
-	
-	}	 
+	}
+	else{
+		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+	}
 
+	}
 
 	}
 	
-
-
-
 ?>
 
 <!DOCTYPE html>

@@ -112,16 +112,9 @@ a:hover {
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-
-<script>
-function myFunction() { 
-	d.getElementById("reset").style.display="none"; 
-	document.getElementById("newpass").style.display="block"; 
-}
 </script>
 
-<div id='background'>
-</div> 
+
     
     <div id='reset' class="card border-dark mb-3" style="max-width: 20rem; height: 420px">
     <div class="card-header"><center><h3 style="font-weight: bold">Reset Form</h3></center></div>
@@ -179,14 +172,24 @@ $row = mysqli_fetch_assoc($result);
         else{
 
           ?>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<div id='newpass' class="card border-dark mb-3" style="max-width: 20rem; height: 420px" style="display:none">
+<div id='newpass' class="card border-dark mb-3" style="max-width: 20rem; height: 420px" style="display:none" visibility="hidden">
       <div class="card-header"><center><h3 style="font-weight: bold">Enter your new password</h3></center></div>
     <form action="" method="post" class="card-body text-dark">
  
     <input type='password' name='password_hash' id='newpass' placeholder='Password' class="Fininput" required /></br>
      
    <input type='submit' name='submit2' value='Reset Password' class="submit-btn"/></br>
+   <br>
+   
    <?php
 
         }
@@ -197,7 +200,9 @@ $row = mysqli_fetch_assoc($result);
 
             $password=$_POST["password_hash"];
 
-           $sql="UPDATE user SET password_hash='$password'";
+            $passH = password_hash($password, PASSWORD_DEFAULT);
+
+           $sql="UPDATE user SET password_hash='$passH'";
        
            $result=mysqli_query($conn,$sql);
        
@@ -214,8 +219,9 @@ $row = mysqli_fetch_assoc($result);
                echo "<p>&nbsp;&nbsp; <a href='Login.php'>Click here to to Login </a></p>";
 
                ?>
-               </div>
+             
            </form>
+           </div>
            <?php }
        
             }

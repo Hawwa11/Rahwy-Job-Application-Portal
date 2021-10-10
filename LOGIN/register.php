@@ -127,7 +127,7 @@ if (isset($_POST['submit'])){
     $user = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = mysqli_real_escape_string($conn, $_POST['password']);
     $pNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
-    
+    $passH = password_hash($pass, PASSWORD_DEFAULT);
     $uCheck = "SELECT * FROM user WHERE username = '$user'";
     $pCheck = "SELECT * FROM user WHERE phone = '$pNum'";
     $startUCheck= mysqli_query($conn, $uCheck);
@@ -143,13 +143,13 @@ if (isset($_POST['submit'])){
     }
     else{
 
-    $insert = mysqli_query($conn,"INSERT INTO user (username, password_hash, phone, user_role) VALUES('$user','$pass','$pNum','0')");
+    $insert = mysqli_query($conn,"INSERT INTO user (username, password_hash, phone, user_role) VALUES('$user','$passH','$pNum','0')");
 
     if($insert){
         echo "You have reistered succesfully";
         session_start();
         $_SESSION['username']= $user;
-        header("Location:home.php"); 
+        header("Location:Login.php"); 
         exit;
         
     }else{
