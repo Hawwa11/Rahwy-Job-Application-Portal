@@ -15,18 +15,18 @@
             exit();
 
         }else {
-            /* // hashing the password
-            $passwordOld = 
-            $passwordNew = */
+            // hashing the password
+            $passwordNewH = password_hash($passwordNew, PASSWORD_DEFAULT);
 
             $email = $_SESSION['username'];
-    
-            $sql = "SELECT * FROM user WHERE username='$email' AND password_hash='$passwordOld'";
+            $sql = "SELECT * FROM user WHERE username='$email'";
             $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
 
-            if(mysqli_num_rows($result) == 1){
+            $passwordHashDB = $row['password_hash'];
+            if (password_verify($password, $passwordHashDB)) {
                 
-                $sql_2 = "UPDATE user SET password_hash = '$passwordNew' WHERE username = '$email'";
+                $sql_2 = "UPDATE user SET password_hash = '$passwordNewH' WHERE username = '$email'";
                 mysqli_query($conn, $sql_2);
 
                 if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
