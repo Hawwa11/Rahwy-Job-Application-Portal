@@ -1,21 +1,17 @@
 <?php 
+    //session_start();
+
     if (isset($_SESSION['username'])) {
+
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Change Password</title>
-            <style>
-                .cpForm {
-                    padding: 20px;
-                    border: 3px solid darkgrey;
-                    border-radius: 30px;
-                }
-            </style>
     </head>
     <body>
-        <form action="changeP.php" class="cpForm" method="post">
+        <form action="changeP.php" method="post">
             <div>
                 <h1>Change Password</h1>
                 <?php if (isset($_GET['error'])) { ?>
