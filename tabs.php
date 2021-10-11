@@ -1,5 +1,8 @@
 <?php 
-    if (isset($_SESSION['username'])) {
+  session_start();
+  if (!isset($_SESSION['username'])) 
+    header("Location: Login.php");
+  else {  
 ?>
 <head>
     <meta charset="UTF-8">
@@ -115,8 +118,5 @@ body, html {
    
 </body>
 <?php 
-    }else{
-        header("Location: Login.php");
-        exit();
     }
 ?>

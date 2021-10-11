@@ -10,7 +10,7 @@ $sql = "CREATE TABLE IF NOT EXISTS form (
     fname VARCHAR(30) NOT NULL,
     email VARCHAR(40) NOT NULL,
     username VARCHAR(100) NOT NULL,
-    FOREIGN KEY (username) REFERENCES user(username),
+    FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE,
     expectedSalary INT(11) NOT NULL,
     cv MEDIUMBLOB NOT NULL,
     martialStatus VARCHAR(15) NOT NULL,

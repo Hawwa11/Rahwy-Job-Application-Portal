@@ -27,7 +27,7 @@ $conn = new mysqli($servername,$username,$password,"rahwy");
 $sql = "CREATE TABLE IF NOT EXISTS user (
     username VARCHAR(100) NOT NULL PRIMARY KEY,
     UNIQUE (username),
-    password_hash CHAR(40) NOT NULL,
+    password_hash CHAR(100) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     user_role INT(11) NOT NULL,
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
