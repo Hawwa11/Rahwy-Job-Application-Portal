@@ -55,7 +55,6 @@ if(isset($_POST['submit'])){
   $fAddress = mysqli_real_escape_string($conn, $_POST['fa']);
   $appStatus = 0;
 
-	echo $jobPosition;
 	$insert = mysqli_query($conn, "INSERT INTO form (fname, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
    VALUES ('$fname','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus')");
 	
