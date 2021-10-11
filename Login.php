@@ -72,6 +72,9 @@
 	}
 
 
+	else{
+
+
 		$hashedPasswordThatWasStoredInDB = $row['password_hash'];
 		if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
 				
@@ -99,6 +102,8 @@
 		}
 
 	}
+
+}
 	
 ?>
 
