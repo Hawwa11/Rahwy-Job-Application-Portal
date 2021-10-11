@@ -7,6 +7,7 @@
     <title>Register With Us!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style> 
 .Finput {
@@ -123,8 +124,19 @@ a:hover {
 ?>
 
 <?php
+session_start();
+
 if (isset($_POST['submit'])){
-    $user = mysqli_real_escape_string($conn, $_POST['email']);
+  $status = '';
+ 
+    if(isset($_POST['captcha']) == $_SESSION['captcha']) {
+   // Validation: Checking entered captcha code with the generated captcha code
+   if(strcmp($_SESSION['captcha'], $_POST['captcha']) != 0){
+
+    echo "<script>alert('Entered captcha code does not match!')</script>";
+
+}else{
+  $user = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = mysqli_real_escape_string($conn, $_POST['password']);
     $pNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
     $passH = password_hash($pass, PASSWORD_DEFAULT);
@@ -134,7 +146,7 @@ if (isset($_POST['submit'])){
     $startPCheck = mysqli_query($conn, $pCheck);
     
     if($_POST['password']!=$_POST['Cpassword']){
-      echo "<div class='modal-dialog modal-dialog-centered'>Password and confirm password must be the same</div>";
+      echo "<script>alert('Password and confirm password must be the same!')</script>";
     }
     else if(mysqli_num_rows($startUCheck)>0){
         echo "This email is already taken please enter a different one";
@@ -147,7 +159,7 @@ if (isset($_POST['submit'])){
 
     if($insert){
         echo "You have reistered succesfully";
-        session_start();
+
         $_SESSION['username']= $user;
         header("Location:Login.php"); 
         exit;
@@ -156,16 +168,19 @@ if (isset($_POST['submit'])){
         echo 'Failed to add new record'.mysqli_error($conn);
     }
 }
-
+	}
 }
+  
+}
+
 ?>
 
 <div id='background'>
 <div id="logo" class="logo"> 
-	<img  width="200" 
-     height="100" src="RAHWYLogo.png"> 
 </div> 
-    <div id='content' class="card border-dark mb-3" style="max-width: 20rem; height: 420px">
+    <div id='content' class="card border-dark mb-3" style="width: 400px; min-height: 400px;, padding: 40px 30px;">
+    <center><img  width="200" 
+     height="100" src="RAHWYLogo.png"> </center>
     <div class="card-header"><h4 style="font-family: Times New Roman">Register With Us!</h4></div>
 
        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="card-body text-dark">
@@ -173,7 +188,11 @@ if (isset($_POST['submit'])){
        <input type="email" name="email" id="email" placeholder="Email..." class="Finput" required /></br>
        <input type="password" name="password" id="password" placeholder="Password..." class="Finput" required /></br>
        <input type="password" name="Cpassword" id="Cpassword" placeholder="Confirm Password..." class="Finput" required /></br>
-       <input type="tel" name="phoneNum" id="phoneNum" placeholder="Phone Number..." class="Finput"  required /></br>
+       <input type="tel" name="phoneNum" id="phoneNum" placeholder="Phone Number..." class="Finput"  required /><br><br>
+       <p><img src="captcha.php" alt="CAPTCHA" class="captcha-image" id='captcha_image'>
+       <i class="fa fa fa-refresh refresh-captcha" style="font-size:24px"></i></p>
+       <input type="text" id="captcha" name="captcha"  required>
+       <p style="font-family: Times New Roman; font-size:0.8rem;">**Click reload icon if image not readable</p>
        <input type="checkbox" name="termsCon" required>
        <a style="font-family: Times New Roman"> I accept all</a> <a id="myBtn" href="#" style="font-family: Times New Roman" >terms and conditions</a>
         </input>
@@ -230,6 +249,12 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+var refreshButton = document.querySelector(".refresh-captcha");
+refreshButton.onclick = function() {
+  document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
+}
+
 </script>
     
 </body>
