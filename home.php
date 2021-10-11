@@ -79,7 +79,7 @@ if(isset($_POST['submit'])){
 //       $imageURL = 'uploads/'.$row["cl"];
 //       echo "<img src=" . $imageURL . " />"; 
 // }}else{echo "No image(s) found..."; } 
-// }
+ }
 
 else{
   $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
