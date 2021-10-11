@@ -26,78 +26,94 @@
 
     //Updating the database
     if(isset($_POST['update'])){
-        $email2 = $_POST['email'];
-        if(filter_var($email2, FILTER_VALIDATE_EMAIL) === false){
+        //$email2 = $_POST['email'];
+        /*if(filter_var($email2, FILTER_VALIDATE_EMAIL) === false){
             echo 'Invalid email format';
-        }
-        else{
+        }*/
+        //else{
             //Will be used for the email verification
-            createConfirmationmbox();
+            //createConfirmationmbox();
             
-            $email2 = mysqli_real_escape_string($conn, $_POST['email']);
+            //$email2 = mysqli_real_escape_string($conn, $_POST['email']);
             $maritalS = mysqli_real_escape_string($conn, $_POST['maritalS']);
             $address = mysqli_real_escape_string($conn, $_POST['address']);
 
             //$update = mysqli_query($conn, "UPDATE form  SET email='$email2', martialStatus='$maritalS', fAddress='$address' WHERE username = '{$username}'");
-            $update = mysqli_query($conn, "UPDATE user a INNER JOIN form b ON (a.username  = b.username )
+            /*$update = mysqli_query($conn, "UPDATE user a INNER JOIN form b ON (a.username  = b.username )
             SET
             a.username  = '$email2',
             b.username = '$email2', email='$email2', martialStatus='$maritalS', fAddress='$address'
-            WHERE a.username = '{$username}' AND b.username = '{$username}' ");
+            WHERE a.username = '{$username}' AND b.username = '{$username}' ");*/
+            $update = mysqli_query($conn, "UPDATE form  SET martialStatus='$maritalS', fAddress='$address' WHERE username = '{$username}'");
 
             if($update){
                 //Session info is updated when an update is done to update the info being displayed
-                $_SESSION['username'] = $email2;
-                $username = $_SESSION['username'];
-                $email=$email2;
+                //$_SESSION['username'] = $email2;
+                //$username = $_SESSION['username'];
+                //$email=$email2;
                 echo 'Successfully edit record.';
             } else {
                 echo 'Failed to edit record because '.mysqli_error($conn);
             }
-        }      
+        //}      
     }
 ?>
 
-<form action="" method="POST">
+<form action="verifyEmail.php" method="POST">
 <h1><u>Profile</u></h1>
-    <!--GENERAL INFO-->
-    <!--FirstName-->
-    <div>
-		<label for="fName"><b>Name: </b></label>
-        <?php echo $fn; ?>
-	</div>
+<?php
+$query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+if (mysqli_num_rows($query)!=0)
+{
+?>
+        <!--GENERAL INFO-->
+        <!--FirstName-->
+        <div>
+            <label for="fName"><b>Name: </b></label>
+            <?php echo $fn; ?>
+        </div>
 
-    <!--Email-->
-    <div>
-		<label for="email"><b>Email: </b></label>
-		<input type="text" name="email" placeholder="email" value="<?php echo $email; ?>" required>
-	</div>
+        <!--Email-->
+        <div>
+            <label for="email"><b>Email: </b></label>
+            <input type="text" name="email" placeholder="email" value="<?php echo $email; ?>" required>
+            <input type="submit" name="verify" value="Verify New Email">
+        </div>
 
-    <!--DOB-->
-    <div>
-		<label for="dob"><b>Date of Birth: </b></label>
-		<?php echo $dob; ?>
-	</div>
+</form>
+<form action="" method="POST">
+        <!--DOB-->
+        <div>
+            <label for="dob"><b>Date of Birth: </b></label>
+            <?php echo $dob; ?>
+        </div>
 
-    <!--MaritalStatus-->
-    <div>
-		<label for="maritalS"><b>Marital Status: </b></label>
-        <!--Checks the marital statuse and displays it in a radio button based on the stored data-->
-        <input type="radio" name="maritalS" <?php if($maritalS=="single") {echo "checked";}?> value="single">Single
-        <input type="radio" name="maritalS" <?php if($maritalS=="married") {echo "checked";}?> value="married">Married
-	</div>
+        <!--MaritalStatus-->
+        <div>
+            <label for="maritalS"><b>Marital Status: </b></label>
+            <!--Checks the marital statuse and displays it in a radio button based on the stored data-->
+            <input type="radio" name="maritalS" <?php if($maritalS=="single") {echo "checked";}?> value="single">Single
+            <input type="radio" name="maritalS" <?php if($maritalS=="married") {echo "checked";}?> value="married">Married
+        </div>
 
-    <!--Address-->
-    <div>
-		<label for="address"><b>Address: </b></label>
-		<input type="text" name="address" placeholder="Address" value="<?php echo $address; ?>" required>
-	</div>
-    <!--Update Button-->
-    <div>
-        <input type="submit" name="update" value="Update">
-    </div>
-    <br>
-
+        <!--Address-->
+        <div>
+            <label for="address"><b>Address: </b></label>
+            <input type="text" name="address" placeholder="Address" value="<?php echo $address; ?>" required>
+        </div>
+        <!--Update Button-->
+        <div>
+            <input type="submit" name="update" value="Update">
+        </div>
+        <br>
+<?php
+}
+else {
+    echo "<h3>Please create a form first</h3>";
+}
+?>
+</form>
+<form action="" method="POST">
     <h1><u>Applications</u></h1>
 <table border = "1">
     <!--APPLICATION RELATED INFO-->
