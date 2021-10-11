@@ -1,65 +1,52 @@
 <?php 
 
-include 'db.php';
+	include 'db.php';
 
-session_start();
+	session_start();
 
-error_reporting(0);
+	error_reporting(0);
 
-if (isset($_SESSION['username'])) {
-    header("Location: tabs.php");
-}
+	if (isset($_SESSION['username'])) {
+		header("Location: tabs.php");
+	}
 
+	if (isset($_POST['submit'])) {
+		$email = $_POST['username'];
+		$password = $_POST['password_hash'];
+		
+		$email = mysqli_real_escape_string($conn,$email);
+		$password = mysqli_real_escape_string($conn,$password);
+		
+		$sql = "SELECT * FROM user WHERE username='$email'";
+		
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_assoc($result);
 
-if (isset($_POST['submit'])) {
+		$hashedPasswordThatWasStoredInDB = $row['password_hash'];
+		if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
+				
+			$_SESSION['username'] = $email;
 
-	$email = $_POST['username'];
-	$password = $_POST['password_hash'];
-	
-	$email = mysqli_real_escape_string($conn,$email);
-	$password = mysqli_real_escape_string($conn,$password);
-	
-
-	$sql = "SELECT * FROM user WHERE username='$email'";
-	
-
-	$result = mysqli_query($conn, $sql);
-	$row = mysqli_fetch_assoc($result);
-
-	$hashedPasswordThatWasStoredInDB = $row['password_hash'];
-
-	if (!$result) {
-	  
-	   echo "Query Failed";
-
-	} 
-
-	else{
- 
-   if (isset($_POST["rememberme"])) {
-			setcookie("username", $email, time() + (86400));
-			setcookie("pw", $password, time() + (86400));							
-		}
-		else {
-			if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
-				$email = $_COOKIE["username"];
-				$password = $_COOKIE["pw"];
-				setcookie("username", $email, time() - 1);
-				setcookie("pw", $password, time() - 1);
+			if (isset($_POST["rememberme"])) {
+				setcookie("username", $email, time() + (86400));
+				setcookie("pw", $password, time() + (86400));							
 			}
-		}	
+			else {
+				if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
+					$email = $_COOKIE["username"];
+					$password = $_COOKIE["pw"];
+					setcookie("username", $email, time() - 1);
+					setcookie("pw", $password, time() - 1);
+				}
+			}	
 
-	if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
-	        
-		$_SESSION['username'] = $row['username'];
+
 			header("Location: tabs.php");
-			
-	}
-	else{
-		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
-	}
-
-	}
+				
+		}
+		else{
+			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+		}
 
 	}
 	
