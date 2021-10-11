@@ -11,26 +11,26 @@
 
 		$email = $_POST['username'];
 		$password = $_POST['password_hash'];
-
-
-
-		
 		$email = mysqli_real_escape_string($conn,$email);
 		$password = mysqli_real_escape_string($conn,$password);
+
+
 		
-		$sql = "SELECT * FROM user WHERE username='$email'";
+		$sql2 = "SELECT * FROM user WHERE username='$email'";
 		
-		$result = mysqli_query($conn, $sql);
+		$result = mysqli_query($conn, $sql2);
 		$row = mysqli_fetch_assoc($result);
+
+		
          
 		if($email=="admin@gmail.com" && $password=="12345"){
+
+	    $email = $_POST['username'];
+		$password = $_POST['password_hash'];
+		$email = mysqli_real_escape_string($conn,$email);
+		$password = mysqli_real_escape_string($conn,$password);
         
        
-			$sql2 = "SELECT * FROM user WHERE username='$email'";
-		
-			$result = mysqli_query($conn, $sql2);
-			$row = mysqli_fetch_assoc($result);
-
 			if(!$row){
 
 				
@@ -73,7 +73,6 @@
 
 
 	else{
-
 
 		$hashedPasswordThatWasStoredInDB = $row['password_hash'];
 		if (password_verify($password, $hashedPasswordThatWasStoredInDB)) { 
@@ -119,16 +118,21 @@
 
 	<title>Login Form</title>
 </head>
+
+<style>
+#text {display:none;color:red}
+</style>
 <body>
 	<div class="container">
 		<form action="" method="post" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;"><img  width="200" 
      height="100" src="RAHWYLogo.png"> </p>
 			<div class="input-group">
-				<input type="email" placeholder="Email" name="username" id="username" value="<?php echo $email; ?>" required>
+				<input type="email" placeholder="Email" name="username" id="user" value="<?php echo $email; ?>" required>
 			</div>
 			<div class="input-group">
-				<input type="password" placeholder="Password" name="password_hash" id="password_hash" value="<?php echo $password ?>" required>
+				<input type="password" placeholder="Password" name="password_hash" id="pass" value="<?php echo $password ?>" required>
+				<p id="text">WARNING! Caps lock is ON.</p>
 				
 			</div>
 			<div style="margin-bottom: 15px;">
@@ -154,5 +158,25 @@
 			</script>";
 		}
 	?>
+
+
+<script>
+var input = document.getElementById("pass");
+
+// Get the warning text
+var text = document.getElementById("text");
+
+// When the user presses any key on the keyboard, run the function
+input.addEventListener("keyup", function(event) {
+
+  // If "caps lock" is pressed, display the warning text
+  if (event.getModifierState("CapsLock")) {
+    text.style.display = "block";
+  } else {
+    text.style.display = "none"
+  }
+});
+
+</script>
 </body>
 </html>
