@@ -1,7 +1,6 @@
 <?php
 include("db.php");
 
-session_start();
 $username = $_SESSION['username'];
 
 //Create the application table if it doesnt exist

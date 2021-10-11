@@ -35,7 +35,8 @@
                     setcookie("username", $email, time() - 1);
                     setcookie("pw", $password, time() - 1);
                 }
-
+                session_destroy();
+                
                 echo "<script>alert('Password successfully changed, returning you to back to the Login page.');window.location='Login.php';</script>";
                 exit();
     
