@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  if (!isset($_SESSION['username'])) 
+    header("Location: Login.php");
+  else {  
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,6 +49,17 @@ body, html {
   padding: 100px 20px;
 }
 
+.logout {
+  background-color: #4d4dff;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 17px;
+  width: 125px;
+}
+
 #Home {background-color: #4d4dff;}
 #AppplicationStatus {background-color: #F08080;}
 #EditProfile {background-color: #ffc966;}
@@ -50,6 +67,9 @@ body, html {
 </style>
 </head>
 <body>
+     <div style=" text-align:right;">
+        <button type="button" onclick="window.location.href='logout.php'" class="logout">Logout</button>
+     </div>
      <div id="logo" class="logo">
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
      </div>
@@ -97,3 +117,6 @@ body, html {
         </script>
    
 </body>
+<?php 
+    }
+?>

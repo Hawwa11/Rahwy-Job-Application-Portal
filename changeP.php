@@ -24,7 +24,7 @@
             $row = mysqli_fetch_assoc($result);
 
             $passwordHashDB = $row['password_hash'];
-            if (password_verify($password, $passwordHashDB)) {
+            if (password_verify($passwordOld, $passwordHashDB)) {
                 
                 $sql_2 = "UPDATE user SET password_hash = '$passwordNewH' WHERE username = '$email'";
                 mysqli_query($conn, $sql_2);
@@ -35,7 +35,8 @@
                     setcookie("username", $email, time() - 1);
                     setcookie("pw", $password, time() - 1);
                 }
-
+                session_destroy();
+                
                 echo "<script>alert('Password successfully changed, returning you to back to the Login page.');window.location='Login.php';</script>";
                 exit();
     
