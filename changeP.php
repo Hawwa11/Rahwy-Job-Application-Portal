@@ -24,7 +24,7 @@
             $row = mysqli_fetch_assoc($result);
 
             $passwordHashDB = $row['password_hash'];
-            if (password_verify($password, $passwordHashDB)) {
+            if (password_verify($passwordOld, $passwordHashDB)) {
                 
                 $sql_2 = "UPDATE user SET password_hash = '$passwordNewH' WHERE username = '$email'";
                 mysqli_query($conn, $sql_2);
