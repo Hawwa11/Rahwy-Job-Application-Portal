@@ -1,13 +1,12 @@
 <?php
 include("db.php");
-
+session_start();
 $username = $_SESSION['username'];
 
 //Create the application table if it doesnt exist
 $sql = "CREATE TABLE IF NOT EXISTS form (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fname VARCHAR(30) NOT NULL,
-    email VARCHAR(40) NOT NULL,
     username VARCHAR(100) NOT NULL,
     FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE,
     expectedSalary INT(11) NOT NULL,
@@ -29,46 +28,68 @@ $sql = "CREATE TABLE IF NOT EXISTS form (
     }
 
 if(isset($_POST['submit'])){
+  $targetDir = "uploads/";
+  $fileCV = basename($_FILES["cv"]["name"]);
+  $targetFilePath = $targetDir . $fileCV;
+  $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+  
+  $fileCL = basename($_FILES["cl"]["name"]);
+  $targetFilePath = $targetDir . $fileCL;
+  $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
-//   $fname = $_POST['fname'];
-// 	$email = $_POST['email'];
-// 	$expectedSalary = $_POST['es'];
-// 	$cv = $_POST['cv'];
-// 	$martialStatus = $_POST['ms'];
-// 	$jobPosition = $_POST['jp'];
-// 	$enquiry = $_POST['enquiry'];
-// 	$coverLetter = $_POST['cl'];
-// 	$dOB = $_POST['dob'];
-// 	$jobType = $_POST['jt'];
-//   $fAddress = $_POST['fa'];
-//   $appStatus = 0;
+  $allowTypes = array('jpg','png','jpeg','gif','pdf');
+    if(in_array($fileType, $allowTypes)){
 
-//  echo $fname."<br>".$email."<br>".$username."<br>".$expectedSalary."<br>".$cv."<br>".$martialStatus."<br>".$jobPosition."<br>".$enquiry."<br>".$coverLetter."<br>".$dOB."<br>".$jobType."<br>".$fAddress."<br>".$appStatus;
-	$fname = $_POST['fname'];
-	$email = $_POST['email'];
+      move_uploaded_file($_FILES["cv"]["tmp_name"],$targetFilePath);
+      move_uploaded_file($_FILES["cl"]["tmp_name"],$targetFilePath);
+
+	$fname = mysqli_real_escape_string($conn, $_POST['fname']);
 	$expectedSalary = $_POST['es'];
-	$cv = $_POST['cv'];
+	$cv = $fileCV;
 	$martialStatus = mysqli_real_escape_string($conn, $_POST['ms']);
-	$jobPosition = mysqli_real_escape_string($conn, $_POST['jp']);
+	$jobPosition = mysqli_real_escape_string($conn, json_encode($_POST['jp']));
 	$enquiry = mysqli_real_escape_string($conn, $_POST['enquiry']);
-	$coverLetter = $_POST['cl'];
+	$coverLetter = $fileCL;
 	$dOB = mysqli_real_escape_string($conn, $_POST['dob']);
 	$jobType = mysqli_real_escape_string($conn, $_POST['jt']);
   $fAddress = mysqli_real_escape_string($conn, $_POST['fa']);
   $appStatus = 0;
+
+	echo $jobPosition;
+	$insert = mysqli_query($conn, "INSERT INTO form (fname, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
+   VALUES ('$fname','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus')");
 	
-	$insert = mysqli_query($conn, "INSERT INTO form (fname, email, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
-   VALUES ('$fname','$email','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus')");
-	
+
 	if($insert){
 		echo 'Successfully submitted the application!';
 	} else {
 		echo 'Failed to submit application due to '.mysqli_error($conn);
 	}
-	
-}
 
-?>
+  //to fetch file from the db
+//   $query = mysqli_query($conn, "SELECT * FROM form");
+
+//   if(mysqli_num_rows($query)!=0){
+
+//     while($row = mysqli_fetch_array($query)){
+//         $imageURL = 'uploads/'.$row["cv"];
+//         echo "<img src=" . $imageURL . " />";      
+// }
+
+//   while($row = mysqli_fetch_array($query)){
+//       $imageURL = 'uploads/'.$row["cl"];
+//       echo "<img src=" . $imageURL . " />"; 
+// }}else{echo "No image(s) found..."; } 
+// }
+
+else{
+  $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+}
+}
+  ?>
+
+
+
 <html>   
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,7 +164,7 @@ input[type=submit]:hover {
 <h1>Welcome <?php echo $username .'!';?></h1>
 <div class="container">
 <h3>**Please fill in the following details in the job application form</h3><br>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
   <!-- Name -->
     <div class="row">
       <div class="col-25">
@@ -153,17 +174,6 @@ input[type=submit]:hover {
         <input type="text" id="fname" name="fname" placeholder="" required>
       </div>
     </div>
-
-    <!-- Email -->
-    <div class="row">
-      <div class="col-25">
-        <label for="fname">Email</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="email" name="email" placeholder="" required>
-      </div>
-    </div>
-
 
     <!-- DOB -->
     <div class="row">
@@ -221,11 +231,11 @@ input[type=submit]:hover {
         <label for="jp">Job Position</label>
       </div>
       <div class="col-75">
-            <input type="radio" name="jp" id="jp" value="Senior">
+            <input type="checkbox" name="jp[]" id="jp" value="Senior">
             <label>Senior</label>
-            <input type="radio" name="jp" id="jp" value="Junior">
+            <input type="checkbox" name="jp[]" id="jp" value="Junior">
             <label>Junior</label>
-            <input type="radio" name="jp" id="jp" value="Intern">
+            <input type="checkbox" name="jp[]" id="jp" value="Intern">
             <label>Intern</label>
       </div>
     </div>
