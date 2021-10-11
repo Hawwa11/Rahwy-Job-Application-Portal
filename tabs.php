@@ -61,7 +61,7 @@ body, html {
 }
 
 #Home {background-color: #4d4dff;}
-#AppplicationStatus {background-color: #F08080;}
+
 #EditProfile {background-color: #ffc966;}
 #ChangePassword {background-color: #66ff66;}
 </style>
@@ -74,7 +74,7 @@ body, html {
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
      </div>
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
-    <button class="tablink" onclick="openPage('AppplicationStatus', this, 'red')">Appplication Status</button>
+    <!--<button class="tablink" onclick="openPage('AppplicationStatus', this, 'red')">Appplication Status</button>-->
     <button class="tablink" onclick="openPage('EditProfile', this, 'orange')">Edit Profile</button>
     <button class="tablink" onclick="openPage('ChangePassword', this, 'green')">Change Password</button>
     
@@ -82,10 +82,10 @@ body, html {
       <?php include("home.php"); ?>
     </div>
 
-    <div id="AppplicationStatus" class="tabcontent">
+    <!--<div id="AppplicationStatus" class="tabcontent">
       <h3>Appplication Status</h3>
       
-    </div>
+    </div>-->
     
     <div id="EditProfile" class="tabcontent">
       <?php include("profilePage.php"); ?>
