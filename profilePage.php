@@ -216,7 +216,7 @@ else {
 
     <td>
         <?php 
-        $imageURL = 'uploads/'.$row["cl"];
+        $imageURL = 'uploads/'.$row["coverLetter"];
         echo "<img src=" . $imageURL . " />";      
         ?>
     </td>
