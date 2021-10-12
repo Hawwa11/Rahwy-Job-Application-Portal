@@ -1,61 +1,34 @@
 <?php
-    include("db.php");
+    include("db.php");//Includes the database file that makes the connection
 
     //fixes and error where session is ignored because an error has been already started
-    if(!isset($_SESSION)) 
+    if(!isset($_SESSION))//If statement to start a session if none was started
     { 
         session_start(); 
     }
 
     //Getting username of logged in user
-    $username = $_SESSION['username'];
-    $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+    $username = $_SESSION['username'];//Saving the username from the session into a variable
+    $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");//Query to get all info related to logged in user and saving required info into variables
     while($row = mysqli_fetch_array($query)){
         $fn = $row['fname'];
         $dob = $row['dOB'];
         $maritalS = $row['martialStatus'];
         $address = $row['fAddress'];
-        /*$jobType = $row['jobType'];
-        $jobPosition = $row['jobPosition'];
-        $expectedSalary = $row['expectedSalary'];
-        $coverLetter = $row['coverLetter'];
-        $cv = $row['cv'];
-        $enquiry = $row['enquiry'];*/
     }
 
     //Updating the database
     if(isset($_POST['update'])){
-        //$email2 = $_POST['email'];
-        /*if(filter_var($email2, FILTER_VALIDATE_EMAIL) === false){
-            echo 'Invalid email format';
-        }*/
-        //else{
-            //Will be used for the email verification
-            //createConfirmationmbox();
-            
-            //$email2 = mysqli_real_escape_string($conn, $_POST['email']);
-            $maritalS = mysqli_real_escape_string($conn, $_POST['maritalS']);
-            $address = mysqli_real_escape_string($conn, $_POST['address']);
+        $maritalS = mysqli_real_escape_string($conn, $_POST['maritalS']);
+        $address = mysqli_real_escape_string($conn, $_POST['address']);
 
-            //$update = mysqli_query($conn, "UPDATE form  SET email='$email2', martialStatus='$maritalS', fAddress='$address' WHERE username = '{$username}'");
-            /*$update = mysqli_query($conn, "UPDATE user a INNER JOIN form b ON (a.username  = b.username )
-            SET
-            a.username  = '$email2',
-            b.username = '$email2', email='$email2', martialStatus='$maritalS', fAddress='$address'
-            WHERE a.username = '{$username}' AND b.username = '{$username}' ");*/
-            $update = mysqli_query($conn, "UPDATE form  SET martialStatus='$maritalS', fAddress='$address' WHERE username = '{$username}'");
-
+        $update = mysqli_query($conn, "UPDATE form  SET martialStatus='$maritalS', fAddress='$address' WHERE username = '{$username}'");
             if($update){
-                //Session info is updated when an update is done to update the info being displayed
-                //$_SESSION['username'] = $email2;
-                //$username = $_SESSION['username'];
-                //$email=$email2;
-                //echo 'Successfully edit record.';
                 echo '<script>alert("Record Successfully edited")</script>';               
-            } else {
+            } 
+            else {
                 echo 'Failed to edit record because '.mysqli_error($conn);
-            }
-        //}      
+            }     
     }
 ?>
 
@@ -66,7 +39,7 @@ $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'"
 if (mysqli_num_rows($query)!=0)
 {
 ?>
-        <!--GENERAL INFO-->
+    <!--GENERAL INFO-->
     <!-- Name -->
     <div class="row">
       <div class="col-25">
@@ -87,11 +60,8 @@ if (mysqli_num_rows($query)!=0)
             <input type="submit" name="verify" value="Verify New Email">
       </div>
     </div>
-
-
 </form>
 <form action="" method="POST">
-
     <!--DOB-->
     <div class="row">
       <div class="col-25">
@@ -135,11 +105,13 @@ if (mysqli_num_rows($query)!=0)
     </div>
 <?php
 }
-else {
+else {//Displayed to new users who haven't created a form yet
     echo "<h3>Please create a form first</h3>";
 }
 ?>
 </form>
+
+<!--Form to diplay all forms submitted by the logged in use-->
 <form action="" method="POST">
     <h1>Applications</h1>
 <table border = "1">
@@ -202,8 +174,8 @@ else {
 </tr>
 <?php
     $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
-    $applicationCounter = 1;
-    while($row = mysqli_fetch_array($query))
+    $applicationCounter = 1;//Variable to display the number of the application being displayed to user
+    while($row = mysqli_fetch_array($query))//Displaying the all the result of the query in a table
     {
 ?>
 <tr>
@@ -225,16 +197,16 @@ else {
 
     <td>
         <?php 
-        $imageURL = 'uploads/'.$row["coverLetter"];
-        //echo "<img src=" . $imageURL . " />";
+        $imageURL = 'uploads/'.$row["coverLetter"];//Getting the saved file from a folder called uploads
+        //A button that can be used by the user to display the file if it was an image
         echo '<input type="button" name="viewCover" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=0\'" value="View Cover Letter">' 
         ?>
     </td>
 
     <td>
         <?php 
-        $imageURL = 'uploads/'.$row["cv"];
-        //echo "<img src=" . $imageURL . " />";
+        $imageURL = 'uploads/'.$row["cv"];//Getting the saved file from a folder called uploads
+        //A button that can be used by the user to display the file if it was an image
         echo '<input type="button" name="viewCV" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=1\'" value="View CV">' 
         ?>
     </td>
@@ -244,7 +216,8 @@ else {
     </td>
 
     <td>
-        <?php 
+        <?php
+        //if statements to display the result of the application status 
             if ($row['appStatus'] == 0){
                 echo 'Pending';
             }
@@ -258,16 +231,8 @@ else {
     </td>
 </tr>
 <?php
-    $applicationCounter++;
+    $applicationCounter++;//Incrementing the counter to display number of applications
     }
     ?>
 </table>    
 </form>
-<?php
-    /*function  createConfirmationmbox(){
-        echo '<script type="text/javascript"> ';
-        echo 'var inputname = prompt("Please enter the verification code sent to your email:", "");';
-        echo 'alert(vCode);';
-        echo '</script>';
-    }*/
-?>
