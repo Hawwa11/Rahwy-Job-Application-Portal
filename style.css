@@ -114,23 +114,29 @@ body {
 }
 
 .container .login-email .input-group .btn {
-    display: block;
+
     width: 100%;
     padding: 15px 20px;
-    text-align: center;
-    border: none;
-    background: #a29bfe;
+    cursor: pointer;
+    display: block;
+    text-align:center;
+    font-size:1.2rem;
+    background: linear-gradient(to right, #2a2966, #a84392);
+    border: 0;
     outline: none;
     border-radius: 30px;
-    font-size: 1.2rem;
-    color: #FFF;
+    color: white;
     cursor: pointer;
     transition: .3s;
+
+
+
 }
+
 
 .container .login-email .input-group .btn:hover {
     transform: translateY(-5px);
-    background: #6c5ce7;
+    background: linear-gradient(to right, #2a2966, #a84392);
 }
 
 .login-register-text {
