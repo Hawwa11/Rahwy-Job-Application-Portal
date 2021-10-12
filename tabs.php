@@ -92,6 +92,7 @@ body, html {
 ?>
      <div style=" text-align:right;">
         <button type="button" onclick="window.location.href='logout.php'" class="logout">Logout</button>
+        <button type="button" onclick="window.location.href='aboutUs.php'" class="logout">About Us!</button>
         <!-- Status:
           <?php 
   //         if ($st==0){
@@ -113,15 +114,10 @@ body, html {
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
     <button class="tablink" onclick="openPage('Profile', this, 'red')">Profile</button>
     <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')"id="defaultOpen3">Change Password</button>
-    <button class="tablink" onclick="openPage('AboutUs', this, 'green')">About Us</button>
+
     
     <div id="Home" class="tabcontent">
       <?php include("home.php"); ?>
-    </div>
-
-    <div id="AboutUs" class="tabcontent">
-      <p>hello</p>
-     <!-- <?php include("aboutUs.php"); ?> -->
     </div>
     
     <div id="Profile" class="tabcontent">
