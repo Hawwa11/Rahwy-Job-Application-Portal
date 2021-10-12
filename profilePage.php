@@ -50,7 +50,8 @@
                 //$_SESSION['username'] = $email2;
                 //$username = $_SESSION['username'];
                 //$email=$email2;
-                echo 'Successfully edit record.';
+                //echo 'Successfully edit record.';
+                echo '<script>alert("Record Successfully edited")</script>';               
             } else {
                 echo 'Failed to edit record because '.mysqli_error($conn);
             }
@@ -120,10 +121,18 @@ if (mysqli_num_rows($query)!=0)
       </div>
       <div class="col-75">
 
-        <textarea id="address" name="address" placeholder="" value="<?php echo $address; ?>" style="height:100px" required></textarea>
+        <textarea id="address" name="address" placeholder="" style="height:100px" required><?php echo $address; ?></textarea>
       </div>
     </div>
 
+    <!-- Update button -->
+    <div class="row">
+    <div class="col-25">
+      </div>
+      <div class="col-75">
+        <input type="submit" name="update" value="Update">
+      </div>
+    </div>
 <?php
 }
 else {
@@ -217,14 +226,16 @@ else {
     <td>
         <?php 
         $imageURL = 'uploads/'.$row["coverLetter"];
-        echo "<img src=" . $imageURL . " />";      
+        //echo "<img src=" . $imageURL . " />";
+        echo '<input type="button" name="viewCover" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=0\'" value="View Cover Letter">' 
         ?>
     </td>
 
     <td>
         <?php 
         $imageURL = 'uploads/'.$row["cv"];
-        echo "<img src=" . $imageURL . " />";      
+        //echo "<img src=" . $imageURL . " />";
+        echo '<input type="button" name="viewCV" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=1\'" value="View CV">' 
         ?>
     </td>
 
@@ -253,10 +264,10 @@ else {
 </table>    
 </form>
 <?php
-    function  createConfirmationmbox(){
+    /*function  createConfirmationmbox(){
         echo '<script type="text/javascript"> ';
         echo 'var inputname = prompt("Please enter the verification code sent to your email:", "");';
         echo 'alert(vCode);';
         echo '</script>';
-    }
+    }*/
 ?>
