@@ -103,7 +103,7 @@
 				setcookie("username", $email, time() - 1);
 				setcookie("pw", $password, time() - 1);
 			}
-			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+			echo "<script>alert('Woops! Email or Password is Wrong.');window.location='Login.php';</script>";
 		}
 
 	}
@@ -120,7 +120,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="loginStyle.css">
 
 	<title>Login Form</title>
 </head>
