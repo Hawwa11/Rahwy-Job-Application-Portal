@@ -161,7 +161,7 @@ if (isset($_POST['submit'])){
 
     if($insert){
         $_SESSION['username']= $user;
-        echo "<script>alert('Registration successful.');window.location.href='Login.php';</script>";
+        echo "<script>alert('Registration successful.');window.location.href='Login.php?ck=1';</script>";
         exit();
         
     }else{

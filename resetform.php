@@ -130,7 +130,7 @@ $row = mysqli_fetch_assoc($result);
        
            else{
               
-            echo "<script>alert('Password has been reset Successfully.');window.location='Login.php';</script>";
+            echo "<script>alert('Password has been reset Successfully.');window.location='Login.php?ck=1';</script>";
      
           }
        

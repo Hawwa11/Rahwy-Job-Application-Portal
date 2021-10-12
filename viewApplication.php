@@ -115,6 +115,7 @@
                 </td>
             </tr>
             <?php
+                // To show data from form table
                 $query = mysqli_query($conn, "SELECT * FROM form");
                 while ($row = mysqli_fetch_array($query)) {
             ?>
@@ -156,10 +157,12 @@
                     </td>
 
                     <td style="text-align: center;">
+                        <!-- Clicking on the button will pass the form id -->
                         <?php echo '<input type="button" name="viewCover" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=0\'" value="View Cover Letter">' ?>
                     </td>
 
                     <td style="text-align: center;">
+                        <!-- Clicking on the button will pass the form id -->
                         <?php echo '<input type="button" name="viewCV" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=1\'" value="View CV" >' ?>
                     </td>
 
@@ -169,6 +172,7 @@
 
                     <td>
                         <?php
+                            // Application status depends on values in database
                             if ($row['appStatus'] == 0) {
                                 echo 'Pending';
                             } else if ($row['appStatus'] == 1) {
@@ -182,13 +186,15 @@
                     <td>
                         <?php
                             $dateApplied = $row['apply_date'];
-                            $dateApplied = date("d-m-Y");
+                            $dateApplied = date("d-m-Y"); // To format the date
                             echo $dateApplied;
                         ?>
                     </td>
 
                     <td>
                         <?php
+                            // Some buttons will be disabled depending on the application status
+                            // Clicking on a button will pass the form id
                             if ($row['appStatus'] == 1) {
                                 echo '<input type="button" name="Accept" disabled value="Accept">&nbsp&nbsp&nbsp';
                                 echo '<input type="button" name="Reject" onclick="window.location = \'acceptRejectApp.php?id=' . $row['id'] . '&button=0\'" value="Reject">';

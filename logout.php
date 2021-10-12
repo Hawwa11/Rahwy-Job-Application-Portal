@@ -1,5 +1,6 @@
 <body style="text-align:center;">
 	<?php
+		//remove existing sessions
 		session_start();
 		session_destroy();
 	?>

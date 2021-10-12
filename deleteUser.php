@@ -8,7 +8,8 @@
     <div id="ViewUser" class="tabcontent">
         <?php
             include("db.php");
-            if (isset($_POST['delete'])) {
+            if (isset($_POST['delete'])) { // if Yes button is clicked
+                // delete user and form that has contains the username passed
                 $delete = mysqli_query($conn, "DELETE FROM user WHERE username='{$_POST['user']}'");
                 $delete2 = mysqli_query($conn, "DELETE FROM form WHERE username='{$_POST['user']}'");
 
@@ -18,7 +19,7 @@
                 } else {
                     echo 'Failed to delete because ' . mysqli_error($conn);
                 }
-            } else if (isset($_POST['no'])) {
+            } else if (isset($_POST['no'])) { // if No button is clicked
                 echo "<script>alert('Operation cancelled, returning you to back to the previous page.');window.location='viewUser.php';</script>";
             }
         ?>
@@ -37,7 +38,7 @@
             <br />
         </form>
 
-        <table border="1" style="width:75%; color: white; margin: auto;">
+        <table border="1" style="width:50%; color: white; margin: auto;">
             <tr>
                 <td>
                     <!--Username-->
@@ -62,6 +63,7 @@
             </tr>
             <?php
                 $user = $_GET['user'];
+                // To show data from form table from username based on user selected
                 $select = "SELECT * FROM user WHERE username='$user'";
                 $query = mysqli_query($conn, $select);
                 while ($row = mysqli_fetch_array($query)) {
@@ -77,7 +79,10 @@
 
                     <td style=" text-align:right;">
                     <?php 
-                        $rs = mysqli_query($conn, "SELECT COUNT(*) as count FROM user a INNER JOIN form b ON (a.username  = b.username )");
+                        $username = $row['username'];
+                        // Count number of forms the user has submitted
+                        $select = "SELECT COUNT(*) as count FROM form WHERE username='$username'";
+                        $rs = mysqli_query($conn, $select);
                         $result = mysqli_fetch_array($rs);
                         echo $result['count'];
                     ?>

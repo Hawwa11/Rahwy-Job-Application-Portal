@@ -111,10 +111,11 @@
                 </td>
             </tr>
             <?php
-            $user = $_GET['user'];
-            $select = "SELECT * FROM form WHERE username='$user'";
-            $query = mysqli_query($conn, $select);
-            while ($row = mysqli_fetch_array($query)) {
+                // To show data from form table based on the username selected
+                $user = $_GET['user'];
+                $select = "SELECT * FROM form WHERE username='$user'";
+                $query = mysqli_query($conn, $select);
+                while ($row = mysqli_fetch_array($query)) {
             ?>
                 <tr>
                     <td style=" text-align:right;">
@@ -154,10 +155,12 @@
                     </td>
 
                     <td>
+                        <!-- Clicking on the button will pass the form id -->
                         <?php echo '<input type="button" name="viewCover" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=0\'" value="View Cover Letter">' ?>
                     </td>
 
                     <td>
+                        <!-- Clicking on the button will pass the form id -->
                         <?php echo '<input type="button" name="viewCV" onclick="window.location = \'viewImage.php?id=' . $row['id'] . '&button=1\'" value="View CV">' ?>
                     </td>
 
@@ -167,20 +170,21 @@
 
                     <td>
                         <?php
-                        if ($row['appStatus'] == 0) {
-                            echo 'Pending';
-                        } else if ($row['appStatus'] == 1) {
-                            echo 'Accepted';
-                        } else {
-                            echo 'Rejected';
-                        }
+                            // Application status depends on values in database
+                            if ($row['appStatus'] == 0) {
+                                echo 'Pending';
+                            } else if ($row['appStatus'] == 1) {
+                                echo 'Accepted';
+                            } else {
+                                echo 'Rejected';
+                            }
                         ?>
                     </td>
 
                     <td>
                         <?php
                         $dateApplied = $row['apply_date'];
-                        $dateApplied = date("d-m-Y");
+                        $dateApplied = date("d-m-Y"); // To format the date
                         echo $dateApplied;
                         ?>
                     </td>
