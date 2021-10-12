@@ -18,25 +18,30 @@
 		<form action="" method="post" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;"><img  width="200" 
      height="100" src="RAHWYLogo.png"> </p>
-     <div class="card-header"><h4 style="font-family: Times New Roman">Reset Password</h4></div>
+     <center><div><h2 style="font-family: Times New Roman">Reset Password</h2></div></center>
+     <br>
+     <br>
 		   <div class="input-group">
       <input type="email" name="username" id="email" placeholder="Enter your Username" required /></br>
        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required /></br>
        </div>
+       <br>
+       <br>
+       <br>
 			<div class="input-group">
-				<button name="submit" class="btn">Submit</button>
+				<center><button name="submit" class="btn2">Submit</button></center>
+        <br>
+        <br>
 			</div>
-			<p class="login-register-text">Password has been reset successfully<a href="Login.php"> Click here to Login</a>.</p>
 </div>
 </form>
 
 <?php
 include "db.php";
 
-
    if(isset($_POST["submit"])){
 
-     	
+ 
 	$email = $_POST['username'];
 	$pNum = $_POST['phone'];
 
@@ -60,7 +65,8 @@ $row = mysqli_fetch_assoc($result);
 
  
     echo "<p>&nbsp;&nbsp; Incorrect username or phone number.</p>";
-    echo "<p>&nbsp;&nbsp; Please try again</p>"
+    echo "<p>&nbsp;&nbsp; Please try again</p>";
+  
        ?>
        </div>
 
@@ -75,20 +81,23 @@ $row = mysqli_fetch_assoc($result);
 }
 
 ?>
-    
+    <html>
     <div class="container" id="newpass">
+    <p class="login-text" style="font-size: 1.5rem; font-weight: 800;">Enter your new password</p>
 		<form action="" method="post" class="login-email">
     <div class="input-group">
     <input type='password' name='password_hash' id='newpass' placeholder='Password' required /></br>
     </div>
-   <input type='submit' name='submit2' value='Reset Password' class="submit-btn"/></br>
-  
+    <div class="input-group">
+   <input type='submit' name='submit2' value='Reset Password' class="btn2"/></br>
    
+     </form>
+   </div>
+   </html>
    <?php
 
         }
 
-      }
     }
     if(isset($_POST["submit2"])){
 
@@ -109,19 +118,21 @@ $row = mysqli_fetch_assoc($result);
            else{
 
             ?>
-            <p class="login-register-text">Password has been reset successfully<a href="Login.php"> Click here to Login</a>.</p>
-
-           <?php
            
+          
+            <p class="login-register-text">Password Successfully Reset <a href="Login.php">Click here to Login</a>.</p>
+           </div>
+</form>
+</html>
+      
+            <?php
           }
        
             }
       
           ?>
 
-            </form>
-            </div>
-  
+    
 
    
    
