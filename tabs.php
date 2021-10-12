@@ -1,4 +1,5 @@
 <?php 
+include ("db.php");
   session_start();
   if (!isset($_SESSION['username'])) 
     header("Location: Login.php");
@@ -35,7 +36,7 @@ body, html {
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 25%;
+  width: 33.33%;
 }
 
 .tablink:hover {
@@ -59,22 +60,56 @@ body, html {
   font-size: 17px;
   width: 125px;
 }
+.success {background-color: #04AA6D;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.danger {background-color: #f44336;} /* Red */ 
 
 #Home {background-color: #4d4dff;}
-#AppplicationStatus {background-color: #F08080;}
+
 #EditProfile {background-color: #ffc966;}
 #ChangePassword {background-color: #66ff66;}
 </style>
 </head>
 <body>
+
+<?php
+   /* $username = $_SESSION['username'];
+    $query = mysqli_query($conn, "SELECT appStatus FROM form WHERE username = '{$username}'");
+    if (mysqli_num_rows($query)=="0"){
+        $status="Pending";
+    }else if(mysqli_num_rows($query)=="1"){
+        $status="Accepted";
+    }else if(mysqli_num_rows($query)=="2"){
+      $status="Rejected";
+    }*/
+
+    $username = $_SESSION['username'];
+    $query = mysqli_query($conn, "SELECT appStatus FROM form WHERE username = '{$username}'");
+    while($row = mysqli_fetch_array($query)){
+        $st = $row['appStatus'];
+    }
+    
+?>
      <div style=" text-align:right;">
         <button type="button" onclick="window.location.href='logout.php'" class="logout">Logout</button>
+        Status:
+          <?php if ($st==0){
+      $status="Pending";
+      echo "<lable id='stat' class='info'>Pending</label>";
+  }else if($st==1){
+      $status="Accepted";
+      echo "<lable id='stat' class='success'>Accepted</label>";
+  }else if($st==2){
+    $status="Rejected";
+    echo "<lable id='stat' class='danger'>Rejected</label>";
+  }?>
+        </lable>
      </div>
      <div id="logo" class="logo">
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
      </div>
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
-    <button class="tablink" onclick="openPage('AppplicationStatus', this, 'red')">Appplication Status</button>
+    <!--<button class="tablink" onclick="openPage('AppplicationStatus', this, 'red')">Appplication Status</button>-->
     <button class="tablink" onclick="openPage('EditProfile', this, 'orange')">Edit Profile</button>
     <button class="tablink" onclick="openPage('ChangePassword', this, 'green')">Change Password</button>
     
@@ -82,10 +117,10 @@ body, html {
       <?php include("home.php"); ?>
     </div>
 
-    <div id="AppplicationStatus" class="tabcontent">
+    <!--<div id="AppplicationStatus" class="tabcontent">
       <h3>Appplication Status</h3>
       
-    </div>
+    </div>-->
     
     <div id="EditProfile" class="tabcontent">
       <?php include("profilePage.php"); ?>
@@ -119,4 +154,5 @@ body, html {
 </body>
 <?php 
     }
+
 ?>

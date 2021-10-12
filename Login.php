@@ -97,6 +97,12 @@
 				
 		}
 		else{
+			if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
+				$email = $_COOKIE["username"];
+				$password = $_COOKIE["pw"];
+				setcookie("username", $email, time() - 1);
+				setcookie("pw", $password, time() - 1);
+			}
 			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
 		}
 
@@ -152,8 +158,8 @@
 			$email = $_COOKIE["username"];
 			$password = $_COOKIE["pw"];
 			echo "<script>
-				document.getElementById('username').value = '$email';
-				document.getElementById('password_hash').value = '$password';
+				document.getElementById('user').value = '$email';
+				document.getElementById('pass').value = '$password';
 				document.getElementById('rememberme').checked = true;
 			</script>";
 		}
