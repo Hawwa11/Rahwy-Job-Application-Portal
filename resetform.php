@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="loginStyle.css">
+ 
 
 	<title>Reset your password</title>
 </head>
@@ -23,8 +24,10 @@
      <br>
 		   <div class="input-group">
       <input type="email" name="username" id="email" placeholder="Enter your Username" required /></br>
+      <br>
        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required /></br>
        </div>
+       <br>
        <br>
        <br>
        <br>
@@ -63,9 +66,8 @@ $row = mysqli_fetch_assoc($result);
    
      if(!$row){ 
 
- 
-    echo "<p>&nbsp;&nbsp; Incorrect username or phone number.</p>";
-    echo "<p>&nbsp;&nbsp; Please try again</p>";
+      echo "<script>alert('Incorrect username or Phone number is Wrong.');window.location='resetform.php';</script>";
+
   
        ?>
        </div>
@@ -77,20 +79,27 @@ $row = mysqli_fetch_assoc($result);
 
           ?>
 <script type="text/javascript">document.getElementById('reset').style.display = 'none';</script>
-<?php
-}
 
-?>
+
     <html>
     <div class="container" id="newpass">
-    <p class="login-text" style="font-size: 1.5rem; font-weight: 800;">Enter your new password</p>
+    
 		<form action="" method="post" class="login-email">
+    <p class="login-text" style="font-size: 2rem; font-weight: 800;"><img  width="200" 
+     height="100" src="RAHWYLogo.png"> </p>
+     <center><div><h2 style="font-family: Times New Roman">Enter your new password</h2></div></center>
     <div class="input-group">
+      <br>
+      <br>
     <input type='password' name='password_hash' id='newpass' placeholder='Password' required /></br>
     </div>
-    <div class="input-group">
+    <br>
+        <br>
+     
+    <div class="input-group">  
    <input type='submit' name='submit2' value='Reset Password' class="btn2"/></br>
-   
+        </div>
+       
      </form>
    </div>
    </html>
@@ -99,6 +108,10 @@ $row = mysqli_fetch_assoc($result);
         }
 
     }
+
+  }
+
+
     if(isset($_POST["submit2"])){
 
             $password=$_POST["password_hash"];
@@ -116,17 +129,9 @@ $row = mysqli_fetch_assoc($result);
            }
        
            else{
-
-            ?>
-           
-          
-            <p class="login-register-text">Password Successfully Reset <a href="Login.php">Click here to Login</a>.</p>
-            <br>
-           </div>
-</form>
-</html>
-      
-            <?php
+              
+            echo "<script>alert('Password has been reset Successfully.');window.location='Login.php';</script>";
+     
           }
        
             }
