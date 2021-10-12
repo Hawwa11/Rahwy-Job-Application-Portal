@@ -112,7 +112,7 @@ body, html {
      </div>
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
     <button class="tablink" onclick="openPage('Profile', this, 'red')">Profile</button>
-    <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')">Change Password</button>
+    <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')"id="defaultOpen3">Change Password</button>
     <button class="tablink" onclick="openPage('AboutUs', this, 'green')">About Us</button>
     
     <div id="Home" class="tabcontent">
@@ -151,6 +151,12 @@ body, html {
         
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
+
+        <?php
+          if (isset($_POST['cp'])) {
+            ?>document.getElementById("defaultOpen3").click();<?php
+          }
+        ?>
         </script>
    
 </body>

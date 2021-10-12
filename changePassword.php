@@ -1,5 +1,40 @@
 <?php 
     if (isset($_SESSION['username'])) {
+
+      include 'db.php';
+
+    if (isset($_POST['passwordOld']) && isset($_POST['passwordNew']) && isset($_POST['passwordConfirm'])) {
+
+        $passwordOld = trim($_POST['passwordOld']);
+        $passwordNew = trim($_POST['passwordNew']);
+        $passwordConfirm = trim($_POST['passwordConfirm']);
+
+        if($passwordNew != $passwordConfirm){
+            echo "The confirmation password does not match";
+
+        }else {
+            // hashing the password
+            $passwordNewH = password_hash($passwordNew, PASSWORD_DEFAULT);
+
+            $email = $_SESSION['username'];
+            $sql = "SELECT * FROM user WHERE username='$email'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+
+            $passwordHashDB = $row['password_hash'];
+            if (password_verify($passwordOld, $passwordHashDB)) {
+              
+                $sql_2 = "UPDATE user SET password_hash = '$passwordNewH' WHERE username = '$email'";
+                mysqli_query($conn, $sql_2);
+                session_destroy();
+
+                echo "<script>alert('Password successfully changed, returning you to back to the Login page.');window.location.href='Login.php?cp=1';</script>";
+            }else {
+                echo "Incorrect password entered";
+            }
+    
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +45,7 @@
     </head>
     <body>
     <div class="container">
-        <form action="changeP.php" class="cpForm" method="post">
+        <form action="" class="cpForm" method="post">
             <div>
                 <h1>Change Password</h1>
                 <?php if (isset($_GET['error'])) { ?>
@@ -48,7 +83,7 @@
                    </div>
 
                    <div class="row">
-                      <input type="submit" name="submit" value="Change Password">
+                      <input type="submit" name="cp" value="Change Password">
                    </div>
             </div>
         </form>

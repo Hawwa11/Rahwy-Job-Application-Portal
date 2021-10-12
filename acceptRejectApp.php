@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
+<?php include("admin.php"); ?>
 
-<head>
-    <title>Accept or Reject Application</title>
-</head>
+<script>
+    document.getElementById('defaultOpen').style.backgroundColor = 'Blue'; 
+</script>
 
 <body>
+<div id="ViewApplication" class="tabcontent">
+
     <?php
     include("db.php");
 
@@ -16,7 +17,7 @@
             $update = mysqli_query($conn, "UPDATE form SET appStatus = 1 WHERE id='{$_POST['id']}'");
 
             if ($update) {
-                echo "<script>alert('Successfully accepted application status!, returning you to back to the previous page.');window.location='viewApplication.php';</script>";
+                echo "<script>alert('Successfully accepted application status! Returning you to back to the previous page.');window.location='viewApplication.php';</script>";
                 exit();
             } else {
                 echo 'Failed to accept record because ' . mysqli_error($conn);
@@ -27,7 +28,7 @@
             <input type="hidden" value="<?php echo $_REQUEST['id']; ?>" name="id">
             <table>
                 <tr>
-                    <?php echo '<td>Are you sure you want to accept Application #' .  $_REQUEST['id'] . '  ?</td>' ?>
+                    <?php echo '<td style="color: white;">Are you sure you want to accept Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
                     <td><input type="submit" name="accept" value="Yes"><input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
                 </tr>
             </table>
@@ -40,7 +41,7 @@
             $update = mysqli_query($conn, "UPDATE form SET appStatus = 2 WHERE id='{$_POST['id']}'");
 
             if ($update) {
-                echo "<script>alert('Successfully rejected application status!, returning you to back to the previous page.');window.location='viewApplication.php';</script>";
+                echo "<script>alert('Successfully rejected application status! Returning you to back to the previous page.');window.location='viewApplication.php';</script>";
                 exit();
             } else {
                 echo 'Failed to reject because ' . mysqli_error($conn);
@@ -52,7 +53,7 @@
         <input type="hidden" value="<?php echo $_REQUEST['id']; ?>" name="id">
         <table>
             <tr>
-                <?php echo '<td>Are you sure you want to reject Application #' .  $_REQUEST['id'] . '  ?</td>' ?>
+                <?php echo '<td style="color: white;">Are you sure you want to reject Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
                 <td><input type="submit" name="reject" value="Yes"><input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
             </tr>
         </table>
@@ -62,7 +63,7 @@
     }
     ?>
     
-    <table border="1">
+    <table border="1" style="width:85%; color: white; margin: auto;">
         <tr>
             <td>
                 <!--Id-->
@@ -217,3 +218,5 @@
         }
         ?>
     </table>
+    </div>
+    </body>
