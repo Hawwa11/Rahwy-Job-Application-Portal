@@ -1,4 +1,4 @@
-<body>
+<body style="text-align:center;">
 	<?php
 		session_start();
 		session_destroy();
