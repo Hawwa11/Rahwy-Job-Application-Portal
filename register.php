@@ -160,11 +160,9 @@ if (isset($_POST['submit'])){
     $insert = mysqli_query($conn,"INSERT INTO user (username, password_hash, phone, user_role) VALUES('$user','$passH','$pNum','0')");
 
     if($insert){
-        echo "You have reistered succesfully";
-
         $_SESSION['username']= $user;
-        header("Location:login.php"); 
-        exit;
+        echo "<script>alert('Registration successful.');window.location.href='Login.php';</script>";
+        exit();
         
     }else{
         echo 'Failed to add new record'.mysqli_error($conn);
@@ -188,7 +186,7 @@ if (isset($_POST['submit'])){
        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="card-body text-dark">
        
 
-       <input type="email" name="email" id="email" placeholder="Email..." required /></br>
+       <input type="email" name="email" id="email" placeholder="Email..." class="Finput" required /></br>
        <input type="password" name="password" id="password" placeholder="Password..." class="Finput" required /></br>
        <input type="password" name="Cpassword" id="Cpassword" placeholder="Confirm Password..." class="Finput" required /></br>
        <input type="tel" name="phoneNum" id="phoneNum" placeholder="Phone Number..." class="Finput"  required /><br><br>

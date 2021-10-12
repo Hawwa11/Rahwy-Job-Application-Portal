@@ -15,8 +15,6 @@
 	}
 
 	if (isset($_POST['submit'])) {
-
-
 		$email = $_POST['username'];
 		$password = $_POST['password_hash'];
 		$email = mysqli_real_escape_string($conn,$email);
@@ -38,6 +36,10 @@
 		$email = mysqli_real_escape_string($conn,$email);
 		$password = mysqli_real_escape_string($conn,$password);
         
+		if (isset($_POST["rememberme"])) {
+			setcookie("username", "admin@gmail.com", time() + (86400));
+			setcookie("pw", "12345", time() + (86400));							
+		}
        
 			if(!$row){
 
