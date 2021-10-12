@@ -5,16 +5,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Change Password</title>
-            <style>
-                .cpForm {
-                    padding: 20px;
-                    border: 3px solid darkgrey;
-                    border-radius: 30px;
-                }
-            </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="formStyle.css">
     </head>
     <body>
+    <div class="container">
         <form action="changeP.php" class="cpForm" method="post">
             <div>
                 <h1>Change Password</h1>
@@ -22,18 +17,42 @@
                     <p class="error"><?php echo $_GET['error']; ?></p>
                 <?php } ?>
 
-                <label>Enter your old password</label><br />
-                <input type="password" placeholder="Old Password" name="passwordOld" required><br /><br />
+                <!-- Old Password -->
+                   <div class="row">
+                     <div class="col-25">
+                       <label>Old password</label>
+                     </div>
+                     <div class="col-75">
+                       <input type="password" placeholder="Enter your old password" name="passwordOld" required>
+                     </div>
+                    </div>
 
-                <label>Enter your new password</label><br />
-                <input type="password" placeholder="New Password" name="passwordNew" required><br /><br />
+                <!-- New Password -->
+                    <div class="row">
+                     <div class="col-25">
+                       <label>New password</label>
+                     </div>
+                     <div class="col-75">
+                       <input type="password" placeholder="Enter your new password" name="passwordNew" required> 
+                     </div>
+                    </div>
 
-                <label>Please re-enter to confirm your new password</label><br />
-                <input type="password" placeholder="Confirm Password" name="passwordConfirm" required><br /><br />
+                <!-- Confirm New Password -->
+                    <div class="row">
+                     <div class="col-25">
+                       <label>Confirm New Password</label>
+                     </div>
+                     <div class="col-75">
+                       <input type="password" placeholder="Please re-enter to confirm your new password" name="passwordConfirm" required>
+                     </div>
+                   </div>
 
-                <button type="submit">Change Password</button>
+                   <div class="row">
+                      <input type="submit" name="submit" value="Chnage Password">
+                   </div>
             </div>
         </form>
+                </div>
     </body>
 </html>
 
