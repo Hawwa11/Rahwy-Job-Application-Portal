@@ -59,18 +59,20 @@
 
                     <td style=" text-align:right;">
                         <?php
-                        $rs = mysqli_query($conn, "SELECT COUNT(*) as count FROM user a INNER JOIN form b ON (a.username  = b.username )");
-                        $result = mysqli_fetch_array($rs);
-                        echo $result['count'];
+                            $username = $row['username'];
+                            $select = "SELECT COUNT(*) as count FROM form WHERE username='$username'";
+                            $rs = mysqli_query($conn, $select);
+                            $result = mysqli_fetch_array($rs);
+                            echo $result['count'];
                         ?>
                     </td>
 
                     <td style="text-align: center;">
-                        <?php echo '<input type="button" name="viewApplication" onclick="window.location = \'viewUserApplication.php?user=' . $row['username'] . '\'" value="View Application" style="width:60%;">' ?>
+                        <?php echo '<input type="button" name="viewApplication" onclick="window.location = \'viewUserApplication.php?user=' . $row['username'] . '\'" value="View Application" style="width:150px;">' ?>
                     </td>
 
                     <td style="text-align: center;">
-                        <?php echo '<input type="button" name="deleteUser" onclick="window.location = \'deleteUser.php?user=' . $row['username'] . '\'" value="Delete User" style="width:60%;">' ?>
+                        <?php echo '<input type="button" name="deleteUser" onclick="window.location = \'deleteUser.php?user=' . $row['username'] . '\'" value="Delete User" style="width:100px;">' ?>
                     </td>
                 </tr>
             <?php
