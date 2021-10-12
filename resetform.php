@@ -121,6 +121,7 @@ $row = mysqli_fetch_assoc($result);
            
           
             <p class="login-register-text">Password Successfully Reset <a href="Login.php">Click here to Login</a>.</p>
+            <br>
            </div>
 </form>
 </html>
