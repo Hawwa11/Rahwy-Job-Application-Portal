@@ -12,7 +12,6 @@
     $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
     while($row = mysqli_fetch_array($query)){
         $fn = $row['fname'];
-        $email = $row['email'];
         $dob = $row['dOB'];
         $maritalS = $row['martialStatus'];
         $address = $row['fAddress'];
@@ -60,52 +59,71 @@
 ?>
 
 <form action="verifyEmail.php" method="POST">
-<h1><u>Profile</u></h1>
+<h1>Profile</h1>
 <?php
 $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
 if (mysqli_num_rows($query)!=0)
 {
 ?>
         <!--GENERAL INFO-->
-        <!--FirstName-->
-        <div>
-            <label for="fName"><b>Name: </b></label>
-            <?php echo $fn; ?>
-        </div>
+    <!-- Name -->
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Full Name</label>
+      </div>
+      <div class="col-75">
+      <?php echo $fn; ?>
+      </div>
+    </div>
 
-        <!--Email-->
-        <div>
-            <label for="email"><b>Email: </b></label>
-            <input type="text" name="email" placeholder="email" value="<?php echo $email; ?>" required>
+    <!--Email-->     
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Email</label>
+      </div>
+      <div class="col-75">
+            <input type="text" name="email" placeholder="email" value="<?php echo $username; ?>" required>
             <input type="submit" name="verify" value="Verify New Email">
-        </div>
+      </div>
+    </div>
+
 
 </form>
 <form action="" method="POST">
-        <!--DOB-->
-        <div>
-            <label for="dob"><b>Date of Birth: </b></label>
-            <?php echo $dob; ?>
-        </div>
 
-        <!--MaritalStatus-->
-        <div>
-            <label for="maritalS"><b>Marital Status: </b></label>
+    <!--DOB-->
+    <div class="row">
+      <div class="col-25">
+        <label for="dob">Date Of Birth</label>
+      </div>
+      <div class="col-75">
+    <?php echo $dob; ?>
+      </div>
+    </div>
+
+    <!-- Martial Status -->
+    <div class="row">
+      <div class="col-25">
+        <label>Martial Status</label>
+      </div>
+      <div class="col-75">
             <!--Checks the marital statuse and displays it in a radio button based on the stored data-->
             <input type="radio" name="maritalS" <?php if($maritalS=="single") {echo "checked";}?> value="single">Single
             <input type="radio" name="maritalS" <?php if($maritalS=="married") {echo "checked";}?> value="married">Married
-        </div>
+      </div>
+    </div>
 
-        <!--Address-->
-        <div>
-            <label for="address"><b>Address: </b></label>
-            <input type="text" name="address" placeholder="Address" value="<?php echo $address; ?>" required>
-        </div>
-        <!--Update Button-->
-        <div>
-            <input type="submit" name="update" value="Update">
-        </div>
-        <br>
+    <!-- Address -->
+    <div class="row">
+      <div class="col-25">
+        <label for="fAddress">Address</label>
+      </div>
+      <div class="col-75">
+
+        <textarea id="address" name="address" placeholder="" value="<?php echo $address; ?>" style="height:100px" required></textarea>
+      </div>
+    </div>
+
 <?php
 }
 else {
@@ -114,7 +132,7 @@ else {
 ?>
 </form>
 <form action="" method="POST">
-    <h1><u>Applications</u></h1>
+    <h1>Applications</h1>
 <table border = "1">
     <!--APPLICATION RELATED INFO-->
     <!--JobType-->
@@ -197,11 +215,17 @@ else {
     </td>
 
     <td>
-        <?php echo $row['coverLetter']; ?>
+        <?php 
+        $imageURL = 'uploads/'.$row["cl"];
+        echo "<img src=" . $imageURL . " />";      
+        ?>
     </td>
 
     <td>
-        <?php echo $row['cv']; ?>
+        <?php 
+        $imageURL = 'uploads/'.$row["cv"];
+        echo "<img src=" . $imageURL . " />";      
+        ?>
     </td>
 
     <td>

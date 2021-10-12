@@ -36,7 +36,7 @@ body, html {
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 33.33%;
+  width: 25%;
 }
 
 .tablink:hover {
@@ -65,9 +65,9 @@ body, html {
 .danger {background-color: #f44336;} /* Red */ 
 
 #Home {background-color: #4d4dff;}
-
-#EditProfile {background-color: #ffc966;}
-#ChangePassword {background-color: #66ff66;}
+#Profile {background-color: #F08080;}
+#ChangePassword {background-color: #ffc966;}
+#AboutUs {background-color: #66ff66;}
 </style>
 </head>
 <body>
@@ -109,20 +109,20 @@ body, html {
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
      </div>
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
-    <!--<button class="tablink" onclick="openPage('AppplicationStatus', this, 'red')">Appplication Status</button>-->
-    <button class="tablink" onclick="openPage('EditProfile', this, 'orange')">Edit Profile</button>
-    <button class="tablink" onclick="openPage('ChangePassword', this, 'green')">Change Password</button>
+    <button class="tablink" onclick="openPage('Profile', this, 'red')">Profile</button>
+    <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')">Change Password</button>
+    <button class="tablink" onclick="openPage('AboutUs', this, 'green')">About Us</button>
     
     <div id="Home" class="tabcontent">
       <?php include("home.php"); ?>
     </div>
 
-    <!--<div id="AppplicationStatus" class="tabcontent">
-      <h3>Appplication Status</h3>
-      
-    </div>-->
+    <div id="AboutUs" class="tabcontent">
+      <p>hello</p>
+     <!-- <?php include("aboutUs.php"); ?> -->
+    </div>
     
-    <div id="EditProfile" class="tabcontent">
+    <div id="Profile" class="tabcontent">
       <?php include("profilePage.php"); ?>
       
     </div>
