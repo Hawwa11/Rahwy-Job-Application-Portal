@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="loginStyle.css">
     <style> 
 .Finput {
   width: 100%;
@@ -185,7 +187,8 @@ if (isset($_POST['submit'])){
 
        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" class="card-body text-dark">
        
-       <input type="email" name="email" id="email" placeholder="Email..." class="Finput" required /></br>
+
+       <input type="email" name="email" id="email" placeholder="Email..." required /></br>
        <input type="password" name="password" id="password" placeholder="Password..." class="Finput" required /></br>
        <input type="password" name="Cpassword" id="Cpassword" placeholder="Confirm Password..." class="Finput" required /></br>
        <input type="tel" name="phoneNum" id="phoneNum" placeholder="Phone Number..." class="Finput"  required /><br><br>
