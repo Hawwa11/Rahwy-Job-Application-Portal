@@ -161,7 +161,7 @@ if (isset($_POST['submit'])){
         echo "You have reistered succesfully";
 
         $_SESSION['username']= $user;
-        header("Location:Login.php"); 
+        header("Location:login.php"); 
         exit;
         
     }else{
@@ -178,7 +178,7 @@ if (isset($_POST['submit'])){
 <div id='background'>
 <div id="logo" class="logo"> 
 </div> 
-    <div id='content' class="card border-dark mb-3" style="width: 400px; min-height: 400px;, padding: 40px 30px;">
+    <div id='content' class="card border-dark mb-3" style="width: 400px; min-height: 400px; padding: 40px 30px;">
     <center><img  width="200" 
      height="100" src="RAHWYLogo.png"> </center>
     <div class="card-header"><h4 style="font-family: Times New Roman">Register With Us!</h4></div>
