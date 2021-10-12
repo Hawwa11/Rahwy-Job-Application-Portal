@@ -112,7 +112,7 @@ body, html {
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
      </div>
     <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
-    <button class="tablink" onclick="openPage('Profile', this, 'red')">Profile</button>
+    <button class="tablink" onclick="openPage('Profile', this, 'red')"id="defaultOpen2">Profile</button>
     <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')"id="defaultOpen3">Change Password</button>
 
     
@@ -151,6 +151,9 @@ body, html {
         <?php
           if (isset($_POST['cp'])) {
             ?>document.getElementById("defaultOpen3").click();<?php
+          }
+          else if (isset($_POST['update'])) {
+            ?>document.getElementById("defaultOpen2").click();<?php
           }
         ?>
         </script>
