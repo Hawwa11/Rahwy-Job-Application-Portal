@@ -83,27 +83,29 @@ body, html {
       $status="Rejected";
     }*/
 
-    $username = $_SESSION['username'];
-    $query = mysqli_query($conn, "SELECT appStatus FROM form WHERE username = '{$username}'");
-    while($row = mysqli_fetch_array($query)){
-        $st = $row['appStatus'];
-    }
+    // $username = $_SESSION['username'];
+    // $query = mysqli_query($conn, "SELECT appStatus FROM form WHERE username = '{$username}'");
+    // while($row = mysqli_fetch_array($query)){
+    //     $st = $row['appStatus'];
+    // }
     
 ?>
      <div style=" text-align:right;">
         <button type="button" onclick="window.location.href='logout.php'" class="logout">Logout</button>
-        Status:
-          <?php if ($st==0){
-      $status="Pending";
-      echo "<lable id='stat' class='info'>Pending</label>";
-  }else if($st==1){
-      $status="Accepted";
-      echo "<lable id='stat' class='success'>Accepted</label>";
-  }else if($st==2){
-    $status="Rejected";
-    echo "<lable id='stat' class='danger'>Rejected</label>";
-  }?>
-        </lable>
+        <!-- Status:
+          <?php 
+  //         if ($st==0){
+  //     $status="Pending";
+  //     echo "<lable id='stat' class='info'>Pending</label>";
+  // }else if($st==1){
+  //     $status="Accepted";
+  //     echo "<lable id='stat' class='success'>Accepted</label>";
+  // }else if($st==2){
+  //   $status="Rejected";
+  //   echo "<lable id='stat' class='danger'>Rejected</label>";
+  // }
+  ?>
+        </lable> -->
      </div>
      <div id="logo" class="logo">
         <center><img src="images/logo.jpeg" width="30%" height="30%"> </center>
