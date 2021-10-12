@@ -131,6 +131,23 @@ body {
   transition: 0.3s;
 }
 
+
+.container .login-email .input-group .btn2 {
+  width: 100%;
+  padding: 15px 20px;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  font-size: 1.0rem;
+  background: linear-gradient(to right, #2a2966, #a84392);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .container .login-email .input-group .btn:hover {
   transform: translateY(-5px);
   background: linear-gradient(to right, #2a2966, #a84392);
@@ -156,4 +173,11 @@ body {
   .container .login-social a {
     display: block;
   }
+}
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+  margin-top: 80px; 
+  border-radius: 30px;
 }
