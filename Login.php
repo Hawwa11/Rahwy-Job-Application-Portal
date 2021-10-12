@@ -54,7 +54,7 @@
 				if (password_verify($password, $PassHash)) { 
 
 					$_SESSION['username'] = $email;
-					header("Location:admin.php");
+					header("Location:viewApplication.php");
 					exit();
 
 
