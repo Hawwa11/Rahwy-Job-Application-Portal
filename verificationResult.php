@@ -16,7 +16,7 @@
             $update = mysqli_query($conn, "UPDATE user a INNER JOIN form b ON (a.username  = b.username )
             SET
             a.username  = '$emailTo',
-            b.username = '$emailTo', email='$emailTo'
+            b.username = '$emailTo'
             WHERE a.username = '{$username}' AND b.username = '{$username}' ");
             if($update){
                 //Session info is updated when an update is done to update the info being displayed

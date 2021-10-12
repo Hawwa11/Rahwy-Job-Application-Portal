@@ -27,6 +27,18 @@ $sql = "CREATE TABLE IF NOT EXISTS form (
       echo "Error creating table: " . $conn->error;
     }
 
+ //Checking if user filled a form before and saving data
+$query4 = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+while($row = mysqli_fetch_array($query4)){
+  if(mysqli_num_rows($query4)!=0){
+    $fn = $row['fname'];
+    $dob = $row['dOB'];
+    $maritalS = $row['martialStatus'];
+    $address = $row['fAddress'];
+  }
+}
+
+
 if(isset($_POST['submit'])){
   $targetDir = "uploads/";
   $fileCV = basename($_FILES["cv"]["name"]);
@@ -46,7 +58,13 @@ if(isset($_POST['submit'])){
 	$fname = mysqli_real_escape_string($conn, $_POST['fname']);
 	$expectedSalary = $_POST['es'];
 	$cv = $fileCV;
-	$martialStatus = mysqli_real_escape_string($conn, $_POST['ms']);
+  if ($_POST['ms'] == null){
+    $martialStatus = $maritalS;
+  }
+  else {
+    $martialStatus = mysqli_real_escape_string($conn, $_POST['ms']);
+  }
+
 	$jobPosition = mysqli_real_escape_string($conn, json_encode($_POST['jp']));
 	$enquiry = mysqli_real_escape_string($conn, $_POST['enquiry']);
 	$coverLetter = $fileCL;
@@ -61,6 +79,32 @@ if(isset($_POST['submit'])){
 
 	if($insert){
 		echo 'Successfully submitted the application!';
+    $emailTo = $username;
+    $subject = "Form Submitted!";
+    $txt = "Thank you for submitting your form. One of our team members will review your form and we will respond to you soon. Kindly track the progress of your form through the profile page!
+Regards,
+Rahwy Co.";
+    mail($emailTo, $subject, $txt, 'From: rahwyco@gmail.com');
+
+    $emailTo2 = "rahwyco@gmail.com";
+    $subject2="New form Submitted!";
+    $txt2 = "New from submitted by: " . $fname . "
+Email: " . $username . "
+Date of birth: " . $dOB . "
+Marital Status: " . $martialStatus . "
+Address: " . $fAddress . "
+Job type: " . $jobType . "
+Job Position: " . $jobPosition . "
+Expected Salary: " . $expectedSalary . "
+Cover Letter & CV: Refer to admin page
+Enquiry: " .$enquiry;
+    mail($emailTo2, $subject2, $txt2, 'From: rahwyco@gmail.com');
+    
+    //Reseting values
+    $fn = $fname;
+    $dob = $dOB;
+    $maritalS = $martialStatus;
+    $address = $fAddress;
 	} else {
 		echo 'Failed to submit application due to '.mysqli_error($conn);
 	}
@@ -106,7 +150,22 @@ else{
         <label for="fname">Full Name</label>
       </div>
       <div class="col-75">
+
+        <?php
+          $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+          if (mysqli_num_rows($query)==0)
+          {          
+        ?>
         <input type="text" id="fname" name="fname" placeholder="" required>
+        <?php
+          }
+          else{
+            ?>
+          <input type="text" id="fname" name="fname" placeholder="" value="<?php echo $fn; ?>" readonly>
+            <?php
+          }
+        ?>
+      
       </div>
     </div>
 
@@ -116,7 +175,21 @@ else{
         <label for="dob">Date Of Birth</label>
       </div>
       <div class="col-75">
-      <input type="date" name="dob" id="dob" style="height:40px" min="1950-01-01" required>
+      <?php
+          $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+          if (mysqli_num_rows($query)==0)
+          {          
+        ?>
+          <input type="date" name="dob" id="dob" style="height:40px" min="1950-01-01" required>
+          <?php
+          }
+          else{
+            ?>
+          <input type="date" name="dob" id="dob" style="height:40px" value="<?php echo $dob; ?>" min="1950-01-01" readonly>
+          <?php
+          }
+        ?>
+
       </div>
     </div>
 
@@ -126,10 +199,24 @@ else{
         <label>Martial Status</label>
       </div>
       <div class="col-75">
-      <input type="radio" name="ms" id="ms" value="single">
-      <label for="male">Single</label>
-      <input type="radio" name="ms" id="ms" value="married">
-      <label for="female">Married</label>
+
+      <?php
+          $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+          if (mysqli_num_rows($query)==0)
+          {          
+        ?>
+          <input type="radio" name="ms" id="ms" value="single">
+          <label for="male">Single</label>
+          <input type="radio" name="ms" id="ms" value="married">
+          <label for="female">Married</label>
+          <?php
+          }
+          else{
+            ?>
+              <input type="text" id="ms" name="ms" placeholder="" value="<?php echo $maritalS; ?>" readonly>
+            <?php
+          }
+        ?>
       </div>
     </div>
 
@@ -139,7 +226,21 @@ else{
         <label for="fAddress">Address</label>
       </div>
       <div class="col-75">
-        <textarea id="fa" name="fa" placeholder="" style="height:100px" required></textarea>
+
+      <?php
+          $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
+          if (mysqli_num_rows($query)==0)
+          {          
+        ?>
+          <textarea id="fa" name="fa" placeholder="" style="height:100px" required></textarea>
+        <?php
+          }
+        else{
+        ?>
+          <textarea id="fa" name="fa" placeholder="" style="height:100px" readonly><?php echo $address; ?></textarea>
+          <?php
+          }
+        ?>
       </div>
     </div>
 
