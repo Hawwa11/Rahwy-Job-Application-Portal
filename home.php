@@ -83,6 +83,7 @@ if(isset($_POST['submit'])){
 
 else{
   $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+  echo $statusMsg;
 }
 }
   ?>
@@ -115,7 +116,7 @@ else{
         <label for="dob">Date Of Birth</label>
       </div>
       <div class="col-75">
-      <input type="date" name="dob" id="dob" style="height:40px" min="2020-01-01" required>
+      <input type="date" name="dob" id="dob" style="height:40px" min="1950-01-01" required>
       </div>
     </div>
 

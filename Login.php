@@ -6,6 +6,14 @@
 
 	error_reporting(0);
 
+	if ($_REQUEST['cp'] == 1) {
+		$email = $_COOKIE["username"];
+		$password = $_COOKIE["pw"];
+		setcookie("username", $email, time() - 1);
+		setcookie("pw", $password, time() - 1);
+		header("Location: Login.php");
+	}
+
 	if (isset($_POST['submit'])) {
 
 

@@ -26,7 +26,7 @@ body {
 }
 .container {
   border-radius: 50%;
-  height: 312px;
+  height: 280px;
   -webkit-tap-highlight-color: transparent;
   transform: scale(0.48);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -129,7 +129,7 @@ body {
   text-align:center;
   border: none;
   background-size: 300% 100%;
-  border-radius: 50px;
+  border-radius: 20px;
   moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
@@ -180,7 +180,7 @@ body {
         <div class="container-inner">
           <img
             class="circle"
-            src="youssefPic.JPG"
+            src="teamPic/youssefPic.JPG"
             />
           <img
             class="img img1"
@@ -196,7 +196,7 @@ body {
         <div class="container-inner">
           <img
             class="circle"
-            src="abdoPic.JPG"
+            src="teamPic/abdoPic.JPG"
             />
           <img
             class="img img1"
@@ -207,20 +207,72 @@ body {
       <div class="name">Abdelrahman</div>
       <div class="title">Senior Manager</div>
     </div>
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img
+            class="circle"
+            src="teamPic/RolaPic.jpg"
+            />
+          <img
+            class="img img1"
+            />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="name">Rola</div>
+      <div class="title">Marketing Manager</div>
+    </div>
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img
+            class="circle"
+            src="teamPic/HawaPic.jpg"
+            />
+          <img
+            class="img img1"
+            />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="name">Hawa</div>
+      <div class="title">Sales Manager</div>
+    </div>
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img
+            class="circle"
+            src="teamPic/WafiqPic.jpg"
+            />
+          <img
+            class="img img1"
+            />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="name">Wafiq</div>
+      <div class="title">CEO</div>
+    </div>
     <div>
+      <hr>
 <p class="centeralign">Rahwy is a startup tech company lead by inspiring young mind. We have one goal and it is to conqure 
     the tech world.</br> Working with us means that you have entered the Rahwy family. Our brand is not a google knockoff  
 we just did not hire a graphic designer yet.</p></br>
+<center><img  width="200" 
+     height="100" src="RAHWYLogo.png"> </center>
 <hr>
     <input type="button" value="Get Map on Phone" onclick="showImage();"class="bn632-hover bn27"/>
     <img id="mapQr"src="images/MapQr.png" style="visibility:hidden" class="center" /></br>
 
-    <input type="button" value="Get Info on Phone" onclick="showImage2();"class="bn632-hover bn27"/>
+    <input type="button" value="Get Info on Phone" onclick="showImage2();"class="bn632-hover bn27"/></br>
     <img id="InfoQr"src="images/InfoQR.png" style="visibility:hidden"  class="center"/>
+    <hr>
 </div>
 
 <div>
-    <hr>
+    
 <h2>Contact Us!</h2>
     <p>
         Contact number: +6012342542 </br>
