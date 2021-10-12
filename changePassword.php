@@ -48,7 +48,7 @@
                    </div>
 
                    <div class="row">
-                      <input type="submit" name="submit" value="Chnage Password">
+                      <input type="submit" name="submit" value="Change Password">
                    </div>
             </div>
         </form>

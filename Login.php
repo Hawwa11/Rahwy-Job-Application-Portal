@@ -103,7 +103,7 @@
 				setcookie("username", $email, time() - 1);
 				setcookie("pw", $password, time() - 1);
 			}
-			echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
+			echo "<script>alert('Woops! Email or Password is Wrong.');window.location='Login.php';</script>";
 		}
 
 	}

@@ -21,8 +21,10 @@
         $button = $_GET['button'];
 
         if ($button == 1) {
-            echo '<img src="data:;base64,' . base64_encode($image['cv']) . '" style="width: 85%;"/>';
+            $imageURL = 'uploads/'.$image['cv'];
+            echo "<img src=" . $imageURL . " style='width: 85%;'/>";     
         } else if ($button == 0) {
-            echo '<img src="data:;base64,' . base64_encode($image['coverLetter']) . '" style="width: 85%;"/>';
+            $imageURL = 'uploads/'.$image['coverLetter'];
+            echo "<img src=" . $imageURL . " style='width: 85%;'/>";         
         }
     ?>

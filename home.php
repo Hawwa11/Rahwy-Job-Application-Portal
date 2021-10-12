@@ -34,14 +34,14 @@ if(isset($_POST['submit'])){
   $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
   
   $fileCL = basename($_FILES["cl"]["name"]);
-  $targetFilePath = $targetDir . $fileCL;
-  $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+  $targetFilePath2 = $targetDir . $fileCL;
+  $fileType = pathinfo($targetFilePath2,PATHINFO_EXTENSION);
 
-  $allowTypes = array('jpg','png','jpeg','gif','pdf');
+  $allowTypes = array('jpg','png','jpeg','gif','pdf', 'PNG');
     if(in_array($fileType, $allowTypes)){
 
       move_uploaded_file($_FILES["cv"]["tmp_name"],$targetFilePath);
-      move_uploaded_file($_FILES["cl"]["tmp_name"],$targetFilePath);
+      move_uploaded_file($_FILES["cl"]["tmp_name"],$targetFilePath2);
 
 	$fname = mysqli_real_escape_string($conn, $_POST['fname']);
 	$expectedSalary = $_POST['es'];
