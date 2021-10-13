@@ -198,6 +198,7 @@ if (isset($_POST['submit'])){
        <a style="font-family: Times New Roman"> I accept all</a> <a id="myBtn" href="#" style="font-family: Times New Roman" >terms and conditions</a>
         </input>
        <input type="submit" name="submit" value="Register" class="submit-btn"/></br>
+       <p class="login-register-text">Already have an account? <a href="Login.php">Login Here</a>.</p>
         </form>
 
 
