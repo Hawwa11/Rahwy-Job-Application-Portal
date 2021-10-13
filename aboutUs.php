@@ -236,7 +236,7 @@ body {
         </div>
       </div>
       <div class="divider"></div>
-      <div class="name">Hawa</div>
+      <div class="name">Hawwa</div>
       <div class="title">Sales Manager</div>
     </div>
     <div class="person">
