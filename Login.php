@@ -6,7 +6,8 @@
 
 	error_reporting(0);
 
-	if ($_REQUEST['cp'] == 1) {
+	//Delete Cookie when page is redirected from changePassword or resetform
+	if ($_REQUEST['ck'] == 1) {
 		$email = $_COOKIE["username"];
 		$password = $_COOKIE["pw"];
 		setcookie("username", $email, time() - 1);
@@ -36,6 +37,7 @@
 		$email = mysqli_real_escape_string($conn,$email);
 		$password = mysqli_real_escape_string($conn,$password);
         
+		//set cookie if checkbox is checked
 		if (isset($_POST["rememberme"])) {
 			setcookie("username", "admin@gmail.com", time() + (86400));
 			setcookie("pw", "12345", time() + (86400));							
@@ -89,11 +91,11 @@
 				
 			$_SESSION['username'] = $email;
 
-			if (isset($_POST["rememberme"])) {
+			if (isset($_POST["rememberme"])) { //set cookie if checkbox is checked
 				setcookie("username", $email, time() + (86400));
 				setcookie("pw", $password, time() + (86400));							
 			}
-			else {
+			else { //delete cookie if checkbox is not checked
 				if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
 					$email = $_COOKIE["username"];
 					$password = $_COOKIE["pw"];
@@ -107,6 +109,7 @@
 				
 		}
 		else{
+			//Delete Cookie when wrong username or password is entered
 			if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
 				$email = $_COOKIE["username"];
 				$password = $_COOKIE["pw"];
@@ -164,6 +167,7 @@
 	</div>
 	
 	<?php
+		//cookies value inserted into input box if cookies exist
 		if(isset($_COOKIE['username']) && isset($_COOKIE["pw"])) {
 			$email = $_COOKIE["username"];
 			$password = $_COOKIE["pw"];

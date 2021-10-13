@@ -3,15 +3,14 @@
 
       include 'db.php';
 
-    if (isset($_POST['passwordOld']) && isset($_POST['passwordNew']) && isset($_POST['passwordConfirm'])) {
-
+    // If change password button is clicked
+    if (isset($_POST['cp'])) {
         $passwordOld = trim($_POST['passwordOld']);
         $passwordNew = trim($_POST['passwordNew']);
         $passwordConfirm = trim($_POST['passwordConfirm']);
 
         if($passwordNew != $passwordConfirm){
             echo "The confirmation password does not match";
-
         }else {
             // hashing the password
             $passwordNewH = password_hash($passwordNew, PASSWORD_DEFAULT);
@@ -24,11 +23,12 @@
             $passwordHashDB = $row['password_hash'];
             if (password_verify($passwordOld, $passwordHashDB)) {
               
+                // Update user with the hashed new password
                 $sql_2 = "UPDATE user SET password_hash = '$passwordNewH' WHERE username = '$email'";
                 mysqli_query($conn, $sql_2);
-                session_destroy();
+                session_destroy(); // destroy sessions
 
-                echo "<script>alert('Password successfully changed, returning you to back to the Login page.');window.location.href='Login.php?cp=1';</script>";
+                echo "<script>alert('Password successfully changed, returning you to back to the Login page.');window.location.href='Login.php?ck=1';</script>";
             }else {
                 echo "Incorrect password entered";
             }
@@ -48,10 +48,6 @@
         <form action="" class="cpForm" method="post">
             <div>
                 <h1>Change Password</h1>
-                <?php if (isset($_GET['error'])) { ?>
-                    <p class="error"><?php echo $_GET['error']; ?></p>
-                <?php } ?>
-
                 <!-- Old Password -->
                    <div class="row">
                      <div class="col-25">

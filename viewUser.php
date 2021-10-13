@@ -45,8 +45,9 @@
                 </td>
             </tr>
             <?php
-            $query = mysqli_query($conn, "SELECT * FROM user WHERE user_role=0");
-            while ($row = mysqli_fetch_array($query)) {
+                // To show data from form table only from user and not admin
+                $query = mysqli_query($conn, "SELECT * FROM user WHERE user_role=0");
+                while ($row = mysqli_fetch_array($query)) {
             ?>
                 <tr>
                     <td>
@@ -60,6 +61,7 @@
                     <td style=" text-align:right;">
                         <?php
                             $username = $row['username'];
+                            // Count number of forms the user has submitted
                             $select = "SELECT COUNT(*) as count FROM form WHERE username='$username'";
                             $rs = mysqli_query($conn, $select);
                             $result = mysqli_fetch_array($rs);
@@ -68,10 +70,12 @@
                     </td>
 
                     <td style="text-align: center;">
+                        <!-- Clicking on the button will pass the user username -->
                         <?php echo '<input type="button" name="viewApplication" onclick="window.location = \'viewUserApplication.php?user=' . $row['username'] . '\'" value="View Application" style="width:150px;">' ?>
                     </td>
 
                     <td style="text-align: center;">
+                        <!-- Clicking on the button will pass the user username -->
                         <?php echo '<input type="button" name="deleteUser" onclick="window.location = \'deleteUser.php?user=' . $row['username'] . '\'" value="Delete User" style="width:100px;">' ?>
                     </td>
                 </tr>
