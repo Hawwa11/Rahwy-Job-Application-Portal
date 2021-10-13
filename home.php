@@ -58,10 +58,12 @@ if(isset($_POST['submit'])){
       move_uploaded_file($_FILES["cv"]["tmp_name"],$targetFilePath);
       move_uploaded_file($_FILES["cl"]["tmp_name"],$targetFilePath2);
 
-  
+  //Get the data from the form through post 
 	$fname = mysqli_real_escape_string($conn, $_POST['fname']);
 	$expectedSalary = $_POST['es'];
 	$cv = $fileCV;
+
+  // Check if user changed ms or using tha uto filled one
   if ($_POST['ms'] == null){
     $martialStatus = $maritalS;
   }
@@ -77,12 +79,14 @@ if(isset($_POST['submit'])){
   $fAddress = mysqli_real_escape_string($conn, $_POST['fa']);
   $appStatus = 0;
 
+  //Insert data in the form table
 	$insert = mysqli_query($conn, "INSERT INTO form (fname, username, expectedSalary, cv, martialStatus, jobPosition, enquiry, coverLetter, dOB, jobType, fAddress, appStatus)
    VALUES ('$fname','$username','$expectedSalary','$cv','$martialStatus','$jobPosition','$enquiry','$coverLetter','$dOB','$jobType','$fAddress','$appStatus')");
 	
-
+  //Check if insert successfull
 	if($insert){
 		echo 'Successfully submitted the application!';
+    // Send email
     $emailTo = $username;
     $subject = "Form Submitted!";
     $txt = "Thank you for submitting your form. One of our team members will review your form and we will respond to you soon. Kindly track the progress of your form through the profile page!
@@ -112,32 +116,13 @@ Enquiry: " .$enquiry;
 	} else {
 		echo 'Failed to submit application due to '.mysqli_error($conn);
 	}
-
-  //to fetch file from the db
-//   $query = mysqli_query($conn, "SELECT * FROM form");
-
-//   if(mysqli_num_rows($query)!=0){
-
-//     while($row = mysqli_fetch_array($query)){
-//         $imageURL = 'uploads/'.$row["cv"];
-//         echo "<img src=" . $imageURL . " />";      
-// }
-
-//   while($row = mysqli_fetch_array($query)){
-//       $imageURL = 'uploads/'.$row["cl"];
-//       echo "<img src=" . $imageURL . " />"; 
-// }}else{echo "No image(s) found..."; } 
  }
 
 else{
-  
-  $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-  echo $statusMsg;
+  echo "<script>alert('Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.')</script>";
 }
 }
   ?>
-
-
 
 <html>   
 <head>
@@ -148,6 +133,7 @@ else{
 <h1>Welcome!</h1>
 <div class="container">
 <h3>**Please fill in the following details in the job application form</h3><br>
+
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
   <!-- Name -->
     <div class="row">
@@ -157,6 +143,7 @@ else{
       <div class="col-75">
 
         <?php
+        // Get from db if user has filled form before 
           $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
           if (mysqli_num_rows($query)==0)
           {          
@@ -181,6 +168,7 @@ else{
       </div>
       <div class="col-75">
       <?php
+          // Get from db if user has filled form before 
           $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
           if (mysqli_num_rows($query)==0)
           {          
@@ -206,6 +194,7 @@ else{
       <div class="col-75">
 
       <?php
+         // Get from db if user has filled form before 
           $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
           if (mysqli_num_rows($query)==0)
           {          
@@ -233,6 +222,7 @@ else{
       <div class="col-75">
 
       <?php
+          // Get from db if user has filled form before 
           $query = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
           if (mysqli_num_rows($query)==0)
           {          
