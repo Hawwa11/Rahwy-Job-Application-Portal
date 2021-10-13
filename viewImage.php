@@ -5,14 +5,19 @@
     <title>View Image</title>
     <style>
         .back {
-            background-color: #4d4dff;
-            color: white;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 12px;
-            font-size: 17px;
             width: 125px;
+            padding: 10px 13px;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+            font-size: 1.0rem;
+            background: linear-gradient(to right, #2a2966, #a84392);
+            border: 0;
+            outline: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
         }
     </style>
 </head>

@@ -1,7 +1,7 @@
 <?php include("admin.php"); ?>
 
 <script>
-    document.getElementById('defaultOpen2').style.backgroundColor = 'Red';
+    document.getElementById('defaultOpen2').style.backgroundColor = 'purple';
 </script>
 
 <body>
@@ -10,7 +10,7 @@
         <button type="button" class="logout" onclick="window.location.href='viewUser.php'">
             < Back
         </button>
-        <table border="1" style="width:75%; color: white; margin: auto;">
+        <table border="1" style="width:75%; margin: auto;">
             <tr>
                 <td>
                     <!--Id-->

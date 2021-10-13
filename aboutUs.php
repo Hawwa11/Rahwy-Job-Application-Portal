@@ -117,11 +117,10 @@ body {
   margin-right: auto;
   
 }
-
 .bn632-hover {
-  width: 200px;
+  width: 180px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   color: #fff;
   cursor: pointer;
   margin: 20px;
@@ -129,7 +128,7 @@ body {
   text-align:center;
   border: none;
   background-size: 300% 100%;
-  border-radius: 20px;
+  border-radius: 50px;
   moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
@@ -148,15 +147,15 @@ body {
   outline: none;
 }
 
-.bn632-hover.bn27 {
+.bn632-hover.bn24 {
     background-image: linear-gradient(
       to right,
-      #ed6ea0,
-      #ec8c69,
-      #f7186a,
-      #fbb03b
+      #6253e1,
+      #852d91,
+      #a3a1ff,
+      #f24645
     );
-    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
   }
 </style>
 
@@ -263,10 +262,10 @@ we just did not hire a graphic designer yet.</p></br>
 <center><img  width="200" 
      height="100" src="RAHWYLogo.png"> </center>
 <hr>
-    <input type="button" value="Get Map on Phone" onclick="showImage();"class="bn632-hover bn27"/>
+    <input type="button" value="Get Map on Phone" onclick="showImage();"class="bn632-hover bn24"/>
     <img id="mapQr"src="images/MapQr.png" style="visibility:hidden" class="center" /></br>
 
-    <input type="button" value="Get Info on Phone" onclick="showImage2();"class="bn632-hover bn27"/></br>
+    <input type="button" value="Get Info on Phone" onclick="showImage2();"class="bn632-hover bn24"/></br>
     <img id="InfoQr"src="images/InfoQR.png" style="visibility:hidden"  class="center"/>
     <hr>
 </div>

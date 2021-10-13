@@ -1,13 +1,13 @@
 <?php include("admin.php"); ?>
 
 <script>
-    document.getElementById('defaultOpen').style.backgroundColor = 'Blue'; 
+    document.getElementById('defaultOpen').style.backgroundColor = "purple"; 
 </script>
 
 <body >
     <?php include("db.php"); ?>
     <div id="ViewApplication" class="tabcontent">
-        <table border="1" style="width:100%; color: white; margin: auto;">
+        <table border="1" style="width:100%; margin: auto;">
             <tr>
                 <td>
                     <!--Id-->

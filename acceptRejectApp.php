@@ -1,7 +1,7 @@
 <?php include("admin.php"); ?>
 
 <script>
-    document.getElementById('defaultOpen').style.backgroundColor = 'Blue'; 
+    document.getElementById('defaultOpen').style.backgroundColor = 'purple'; 
 </script>
 
 <body>
@@ -30,8 +30,8 @@
                 <input type="hidden" value="<?php echo $_REQUEST['id']; ?>" name="id">
                 <table>
                     <tr>
-                        <?php echo '<td style="color: white;">Are you sure you want to accept Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
-                        <td><input type="submit" name="accept" value="Yes"><input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
+                        <?php echo '<td>Are you sure you want to accept Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
+                        <td><input type="submit" name="accept" value="Yes">&nbsp&nbsp<input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
                     </tr>
                 </table>
                 <br />
@@ -56,8 +56,8 @@
             <input type="hidden" value="<?php echo $_REQUEST['id']; ?>" name="id">
             <table>
                 <tr>
-                    <?php echo '<td style="color: white;">Are you sure you want to reject Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
-                    <td><input type="submit" name="reject" value="Yes"><input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
+                    <?php echo '<td>Are you sure you want to reject Application ' .  $_REQUEST['id'] . '  ?</td>' ?>
+                    <td><input type="submit" name="reject" value="Yes">&nbsp&nbsp<input type="button" value="Cancel" onclick="window.location='viewApplication.php'"></td>
                 </tr>
             </table>
             <br />
@@ -67,7 +67,7 @@
         ?>
         
         <!-- Display the form selected -->
-        <table border="1" style="width:85%; color: white; margin: auto;">
+        <table border="1" style="width:85%; margin: auto;">
             <tr>
                 <td>
                     <!--Id-->
