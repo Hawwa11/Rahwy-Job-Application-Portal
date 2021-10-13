@@ -1,7 +1,7 @@
 <?php include("admin.php"); ?>
 
 <script>
-    document.getElementById('defaultOpen2').style.backgroundColor = 'Red';
+    document.getElementById('defaultOpen2').style.backgroundColor = 'purple';
 </script>
 
 <body>
@@ -28,17 +28,17 @@
             <input type="hidden" value="<?php echo $_REQUEST['user']; ?>" name="user">
             <table>
                 <tr>
-                    <?php echo '<td style="color: white;">All applications sent by this user will also be deleted.</td>' ?>
+                    <?php echo '<td>All applications sent by this user will also be deleted.</td>' ?>
                 </tr>
                 <tr>
-                    <?php echo '<td style="color: white;">Are you sure you want to delete this user?</td>' ?>
+                    <?php echo '<td>Are you sure you want to delete this user?</td>' ?>
                     <td><input type="submit" name="delete" value="Yes">&nbsp&nbsp<input type="submit" name="no" value="no"></td>
                 </tr>
             </table>
             <br />
         </form>
 
-        <table border="1" style="width:50%; color: white; margin: auto;">
+        <table border="1" style="width:50%; margin: auto;">
             <tr>
                 <td>
                     <!--Username-->
