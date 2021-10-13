@@ -20,18 +20,18 @@ include ("db.php");
 body, html {
   height: 100%;
   margin: 0;
-  font-family: Arial;
+  font-family: sans-serif;
 }
 
 .logo{
-  background-color: #505050;
+  background-color: #f2f2f2;
   width: 100%;
 }
 
 /* Style tab links */
 .tablink {
   background-color: #505050;
-  color: white;
+  color: whitesmoke;
   float: left;
   border: none;
   outline: none;
@@ -47,7 +47,7 @@ body, html {
 
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
-  color: white;
+  color: black;
   display: none;
   padding: 100px 20px;
 }
@@ -66,7 +66,7 @@ body, html {
   margin-top: 10px;
   margin-left: 10px;
   display:inline-block;
-  float: left;
+  float:left;
 }
 
 .inner2{
@@ -76,7 +76,7 @@ body, html {
   float: right;
 }
 .outer{
-  background-color: #505050;
+  background-color: #f2f2f2;
 
 }
 
@@ -86,12 +86,12 @@ body, html {
   cursor: pointer;
   display: block;
   text-align: center;
-  font-size: 0.75rem;
-  background: #f2f2f2;
+  font-size: 1.0rem;
+  background: linear-gradient(to right, #2a2966, #a84392);
   border: 0;
   outline: none;
   border-radius: 5px;
-  color: grey;
+  color: white;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -101,9 +101,9 @@ body, html {
 .info {background-color: #2196F3;} /* Blue */
 .danger {background-color: #f44336;} /* Red */ 
 
-#Home {background-color: #4d4dff;}
-#Profile {background-color: #F08080;}
-#ChangePassword {background-color: #ffc966;}
+#Home {background-color:#f2f2f2;}
+#Profile {background-color:#f2f2f2;}
+#ChangePassword {background-color:#f2f2f2}
 </style>
 </head>
 <body>
@@ -124,9 +124,9 @@ body, html {
      </div>
 
      <!-- Display buttons for tabs (uses script function to pass tabs properties) -->
-    <button class="tablink" onclick="openPage('Home', this, 'blue')"id="defaultOpen">Home</button> 
-    <button class="tablink" onclick="openPage('Profile', this, 'red')"id="defaultOpen2">Profile</button>
-    <button class="tablink" onclick="openPage('ChangePassword', this, 'orange')"id="defaultOpen3">Change Password</button>
+    <button class="tablink" onclick="openPage('Home', this, 'purple')"id="defaultOpen">Home</button> 
+    <button class="tablink" onclick="openPage('Profile', this, 'purple')"id="defaultOpen2">Profile</button>
+    <button class="tablink" onclick="openPage('ChangePassword', this, 'purple')"id="defaultOpen3">Change Password</button>
 
     <!-- Redirects to the page of the tab that is clicked  -->
     <div id="Home" class="tabcontent">
