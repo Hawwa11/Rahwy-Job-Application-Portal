@@ -7,8 +7,8 @@ $username = $_SESSION['username'];
 $sql = "CREATE TABLE IF NOT EXISTS form (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fname VARCHAR(30) NOT NULL,
-    username VARCHAR(100) NOT NULL,
-    FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    username VARCHAR(100) NOT NULL, 
+    FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE, -- Set usrname as foreign key from user table
     expectedSalary INT(11) NOT NULL,
     cv MEDIUMBLOB NOT NULL,
     martialStatus VARCHAR(15) NOT NULL,
@@ -27,7 +27,7 @@ $sql = "CREATE TABLE IF NOT EXISTS form (
       echo "Error creating table: " . $conn->error;
     }
 
- //Checking if user filled a form before and saving data
+ // Checking if user filled a form before and saving data
 $query4 = mysqli_query($conn, "SELECT * FROM form WHERE username = '{$username}'");
 while($row = mysqli_fetch_array($query4)){
   if(mysqli_num_rows($query4)!=0){
@@ -38,14 +38,17 @@ while($row = mysqli_fetch_array($query4)){
   }
 }
 
-
+// Check if form submitted 
 if(isset($_POST['submit'])){
+
+  // Upload the files
   $targetDir = "uploads/";
-  $fileCV = basename($_FILES["cv"]["name"]);
+
+  $fileCV = basename($_FILES["cv"]["name"]); // For CV
   $targetFilePath = $targetDir . $fileCV;
   $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
   
-  $fileCL = basename($_FILES["cl"]["name"]);
+  $fileCL = basename($_FILES["cl"]["name"]);  // For Cover letter
   $targetFilePath2 = $targetDir . $fileCL;
   $fileType = pathinfo($targetFilePath2,PATHINFO_EXTENSION);
 
@@ -55,6 +58,7 @@ if(isset($_POST['submit'])){
       move_uploaded_file($_FILES["cv"]["tmp_name"],$targetFilePath);
       move_uploaded_file($_FILES["cl"]["tmp_name"],$targetFilePath2);
 
+  
 	$fname = mysqli_real_escape_string($conn, $_POST['fname']);
 	$expectedSalary = $_POST['es'];
 	$cv = $fileCV;
@@ -126,6 +130,7 @@ Enquiry: " .$enquiry;
  }
 
 else{
+  
   $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
   echo $statusMsg;
 }
