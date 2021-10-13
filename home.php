@@ -173,7 +173,7 @@ else{
           if (mysqli_num_rows($query)==0)
           {          
         ?>
-          <input type="date" name="dob" id="dob" style="height:40px" min="1950-01-01" required>
+          <input type="date" name="dob" id="dob" style="height:40px" min="1950-01-01" max="2005-12-30" required>
           <?php
           }
           else{
