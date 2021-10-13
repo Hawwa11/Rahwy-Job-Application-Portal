@@ -134,7 +134,7 @@ if (isset($_POST['submit'])){
     if(isset($_POST['captcha']) == $_SESSION['captcha']) {
    // Validation: Checking entered captcha code with the generated captcha code
    if(strcmp($_SESSION['captcha'], $_POST['captcha']) != 0){
-
+    
     echo "<script>alert('Entered captcha code does not match!')</script>";
 
 }else{
