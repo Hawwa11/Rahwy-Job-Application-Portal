@@ -151,9 +151,9 @@ if (isset($_POST['submit'])){
       echo "<script>alert('Password and confirm password must be the same!')</script>";
     }
     else if(mysqli_num_rows($startUCheck)>0){
-        echo "This email is already taken please enter a different one";
+        echo "<script>alert('Username is already taken please try a different one')</script>";
     }else if(mysqli_num_rows($startPCheck)>0){
-        echo "This phone num is already taken please enter a different one";
+        echo "<script>alert('This phone num is already taken please enter a different one')</script>";
     }
     else{
 
